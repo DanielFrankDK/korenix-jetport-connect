@@ -541,14 +541,18 @@ def le(placeholder="", password=False) -> QLineEdit:
     w = QLineEdit(); w.setPlaceholderText(placeholder)
     if password: w.setEchoMode(QLineEdit.EchoMode.Password)
     w.setStyleSheet(f"QLineEdit{{border:1px solid {BORDER};border-radius:4px;"
-                    f"padding:4px 8px;background:white;}}"
+                    f"padding:4px 8px;background:white;color:#333;}}"
                     f"QLineEdit:focus{{border-color:{ACCENT};}}")
     return w
 
 def cb(items) -> QComboBox:
     w = QComboBox(); w.addItems(items)
-    w.setStyleSheet(f"QComboBox{{border:1px solid {BORDER};border-radius:4px;"
-                    f"padding:4px 8px;background:white;}}")
+    w.setStyleSheet(
+        f"QComboBox{{border:1px solid {BORDER};border-radius:4px;"
+        f"padding:4px 8px;background:white;color:#333;}}"
+        f"QComboBox QAbstractItemView{{background:white;color:#333;border:1px solid {BORDER};"
+        f"selection-background-color:{ACCENT};selection-color:white;}}"
+    )
     return w
 
 def dot(color) -> QLabel:
@@ -1350,7 +1354,7 @@ class JetPortManager(QMainWindow):
             QTabBar::tab:selected{{background:{ACCENT};color:white;}}
             QTabBar::tab:hover:!selected{{background:#d3d9e0;}}
             QLabel{{color:#333;}} QSpinBox{{border:1px solid {BORDER};border-radius:4px;
-                                            padding:4px 8px;background:white;}}
+                                            padding:4px 8px;background:white;color:#333;}}
             QCheckBox{{color:#333;}} QRadioButton{{color:#333;}}
         """)
 
