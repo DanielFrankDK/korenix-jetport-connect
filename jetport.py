@@ -1406,6 +1406,26 @@ class JetPortManager(QMainWindow):
 def main():
     ip = next((a for a in sys.argv[1:] if re.match(r"^\d+\.\d+\.\d+\.\d+$", a)), "192.168.10.2")
     app = QApplication(sys.argv); app.setStyle("Fusion")
+
+    # Force a light-mode palette so Fusion doesn't inherit dark system colors.
+    # Without this, popup windows (combo dropdowns, etc.) draw white text on
+    # white because QPalette.Text is white from the OS dark theme.
+    from PyQt6.QtGui import QPalette
+    p = QPalette()
+    p.setColor(QPalette.ColorRole.Window,          QColor(BG))
+    p.setColor(QPalette.ColorRole.WindowText,      QColor("#333333"))
+    p.setColor(QPalette.ColorRole.Base,            QColor("#ffffff"))
+    p.setColor(QPalette.ColorRole.AlternateBase,   QColor(BG))
+    p.setColor(QPalette.ColorRole.Text,            QColor("#333333"))
+    p.setColor(QPalette.ColorRole.PlaceholderText, QColor("#aaaaaa"))
+    p.setColor(QPalette.ColorRole.Button,          QColor("#eaedf1"))
+    p.setColor(QPalette.ColorRole.ButtonText,      QColor("#24292f"))
+    p.setColor(QPalette.ColorRole.Highlight,       QColor(ACCENT))
+    p.setColor(QPalette.ColorRole.HighlightedText, QColor("#ffffff"))
+    p.setColor(QPalette.ColorRole.ToolTipBase,     QColor("#ffffff"))
+    p.setColor(QPalette.ColorRole.ToolTipText,     QColor("#333333"))
+    app.setPalette(p)
+
     win = JetPortManager(ip); win.show()
     sys.exit(app.exec())
 
