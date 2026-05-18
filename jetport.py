@@ -411,6 +411,143 @@ class DeviceConnection:
         ok = st in (200, 302)
         return ok, f"HTTP {st}"
 
+    # ── SSH-based network config ──────────────────────────────────────────────
+
+    def set_network_via_ssh(self, new_ip: str, new_mask: str, new_gw: str) -> tuple[bool, str]:
+        """
+        Drive the JetPort SSH text-menu to change IP/mask/gateway.
+        Logs every prompt and response to self.log in real time.
+        """
+        try:
+            import pexpect
+        except ImportError:
+            return False, "pexpect not installed — run: pip3 install pexpect"
+
+        import re
+        password = self.password or "admin"
+
+        ssh_cmd = (
+            f"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "
+            f"-o HostKeyAlgorithms=+ssh-rsa,ssh-dss "
+            f"-o KexAlgorithms=+diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,"
+            f"diffie-hellman-group14-sha256 "
+            f"-o Ciphers=+3des-cbc,aes128-cbc,aes256-cbc,aes128-ctr "
+            f"-p 22 admin@{self.ip}"
+        )
+
+        self._log(f"SSH-NET: connecting to {self.ip} …")
+
+        TIMEOUT = pexpect.TIMEOUT
+        EOF     = pexpect.EOF
+
+        def _flush(child):
+            txt = ((child.before or "") +
+                   (child.after if isinstance(child.after, str) else ""))
+            for line in txt.splitlines():
+                if line.strip():
+                    self._log(f"  {line.rstrip()}")
+            return txt
+
+        def _send(child, text):
+            self._log(f"SSH> {text!r}" if text else "SSH> <Enter>")
+            child.sendline(text)
+
+        def _find_opt(text, *keywords):
+            """Return the menu option number that matches one of the keywords."""
+            for kw in keywords:
+                m = re.search(rf"(\d+)\s*[.)]\s*[^\n]*{kw}", text, re.I)
+                if m:
+                    return m.group(1)
+            return None
+
+        try:
+            child = pexpect.spawn(ssh_cmd, timeout=20, encoding="utf-8", echo=False)
+
+            # ── SSH auth ──────────────────────────────────────────────────────
+            idx = child.expect(["[Pp]assword:", "[Yy]es/[Nn]o", TIMEOUT, EOF], timeout=15)
+            _flush(child)
+            if idx == 1:
+                _send(child, "yes")
+                child.expect(["[Pp]assword:", TIMEOUT], timeout=10)
+                _flush(child)
+                idx = 0
+            if idx == 0:
+                _send(child, password)
+            else:
+                return False, "SSH: timed out at password prompt"
+
+            # ── Device's extra "System Password" prompt ───────────────────────
+            idx = child.expect(
+                ["[Ss]ystem.{0,10}[Pp]assword", r"\d+\s*[.)]\s*\S", "Menu", "=>", TIMEOUT, EOF],
+                timeout=15,
+            )
+            menu_buf = _flush(child)
+            if idx == 0:
+                _send(child, password)
+                idx = child.expect([r"\d+\s*[.)]\s*\S", "Menu", TIMEOUT], timeout=10)
+                menu_buf = _flush(child)
+
+            if idx >= 4:
+                return False, "SSH: could not reach main menu after login"
+
+            # ── Main menu → Server Configuration ─────────────────────────────
+            opt = _find_opt(menu_buf, "Server") or "1"
+            _send(child, opt)
+
+            idx = child.expect([r"\d+\s*[.)]\s*\S", "Menu", TIMEOUT, EOF], timeout=10)
+            menu_buf = _flush(child)
+            if idx >= 2:
+                return False, "SSH: could not reach Server Configuration menu"
+
+            # ── Server Config menu → Networking ───────────────────────────────
+            opt = _find_opt(menu_buf, "Network") or "3"
+            _send(child, opt)
+
+            # ── Fill in network fields ────────────────────────────────────────
+            # The device shows prompts like:  IP Address [192.168.10.2]:
+            # We answer each; empty string = press Enter to keep current value.
+            field_answers = {
+                r"[Ii][Pp]\s*[Mm]ode":               "",        # keep current mode
+                r"[Ii][Pp]\s*[Aa]ddr|IP\s*Address":  new_ip,
+                r"[Ss]ubnet|[Mm]ask":                 new_mask,
+                r"[Gg]ateway|[Gg][Ww]":               new_gw,
+                r"[Pp]rimary\s*DNS|DNS\s*1":          "",
+                r"[Ss]econdary\s*DNS|DNS\s*2":        "",
+            }
+
+            for _ in range(10):
+                idx = child.expect(
+                    [r"\[.*?\]\s*:", r"\[.*?\]\s*\?",    # field prompt
+                     r"\d+\s*[.)]\s*\S",                 # back to a menu
+                     "apply", TIMEOUT, EOF],
+                    timeout=8,
+                )
+                prompt_buf = _flush(child)
+                if idx >= 2:   # menu appeared → done with fields
+                    break
+                if idx >= 4:   # timeout/EOF
+                    break
+
+                answer = ""
+                for pattern, val in field_answers.items():
+                    if re.search(pattern, prompt_buf, re.I):
+                        answer = val
+                        break
+                _send(child, answer)
+
+            # ── Apply and save ────────────────────────────────────────────────
+            _send(child, "a")
+            child.expect(["[Ss]av", "[Aa]ppl", r"\d+\s*[.)]\s*", TIMEOUT, EOF], timeout=10)
+            _flush(child)
+
+            child.close(force=True)
+            self._log("SSH-NET: done — network settings applied.")
+            return True, "Network settings applied via SSH"
+
+        except Exception as exc:
+            self._log(f"SSH-NET error: {exc}")
+            return False, str(exc)
+
     # ── reboot / defaults ─────────────────────────────────────────────────────
 
     def reboot(self) -> tuple[bool, str]:
@@ -661,19 +798,11 @@ class ConfigTab(QWidget):
     def _on_loaded(self, res):
         action, visible, hidden = res
         if action is None:
-            self.app.set_status(f"Could not load '{self.section}' page — see Log tab", error=True)
-            QMessageBox.warning(
-                self,
-                "Page Not Found on Device",
-                f"Could not find the <b>{self.section}</b> configuration page on the device.<br><br>"
-                f"All known URL candidates returned 404. The device's actual page paths are unknown.<br><br>"
-                f"<b>To find the real URLs:</b><br>"
-                f"1. Connect to the device (Connect tab)<br>"
-                f"2. Click <b>Probe Device URLs</b> — results appear in the <b>Log</b> tab<br>"
-                f"3. Share the log output so the correct paths can be added<br><br>"
-                f"<b>To change the IP right now:</b> use the <b>SSH Terminal</b> tab — "
-                f"log in as admin and navigate the text menu.",
-            )
+            msg = (f"Could not load '{self.section}' config page — all URL candidates returned 404. "
+                   f"Use 'Probe Device URLs' on the Connect tab to discover valid paths, "
+                   f"or use 'Apply Network via SSH' to set network settings directly.")
+            self.conn._log(msg)
+            self.app.set_status(f"Could not load '{self.section}' — see Log tab", error=True)
             return
         self._action = action; self._visible = visible; self._hidden = hidden
         self.populate(visible)
@@ -921,9 +1050,16 @@ class ServerConfigTab(ConfigTab):
         self.le_ip   = le("192.168.10.2"); self.le_ip.setText("192.168.10.2")
         self.le_mask = le("255.255.255.0"); self.le_mask.setText("255.255.255.0")
         self.le_gw   = le("gateway"); self.le_dns1 = le("primary DNS"); self.le_dns2 = le("secondary DNS")
+        self.btn_ssh_net = btn("Apply Network via SSH")
+        self.btn_ssh_net.setToolTip(
+            "Uses the device SSH text-menu to set IP/mask/gateway directly.\n"
+            "Works even when the web config page cannot be loaded."
+        )
+        self.btn_ssh_net.clicked.connect(self._do_ssh_network)
         nl.addRow("IP Mode:", ip_row); nl.addRow("IP Address:", self.le_ip)
         nl.addRow("Netmask:", self.le_mask); nl.addRow("Gateway:", self.le_gw)
         nl.addRow("DNS 1:", self.le_dns1); nl.addRow("DNS 2:", self.le_dns2)
+        nl.addRow("", self.btn_ssh_net)
         root.addWidget(nc)
 
         pw = card("Change Password")
@@ -943,6 +1079,25 @@ class ServerConfigTab(ConfigTab):
         self.setLayout(QVBoxLayout())
         self.layout().setContentsMargins(0,0,0,0)
         self.layout().addWidget(scrolled(inner))
+
+    def _do_ssh_network(self):
+        if not self.conn.connected:
+            self.app.set_status("Connect to device first", error=True); return
+        new_ip   = self.le_ip.text().strip()
+        new_mask = self.le_mask.text().strip()
+        new_gw   = self.le_gw.text().strip()
+        if not new_ip:
+            self.app.set_status("Enter an IP address first", error=True); return
+        self.btn_ssh_net.setEnabled(False)
+        self.app.set_status("Applying network settings via SSH — check Log tab…")
+        def run():
+            return self.conn.set_network_via_ssh(new_ip, new_mask, new_gw)
+        w = Worker(run)
+        w.result.connect(lambda r: self.app.set_status(
+            r[1] if r[0] else f"SSH network error: {r[1]}", error=not r[0]))
+        w.error.connect(lambda e: self.app.set_status(f"SSH error: {e}", error=True))
+        w.finished.connect(lambda: self.btn_ssh_net.setEnabled(True))
+        w.start(); self._worker = w
 
     def populate(self, f: dict):
         def _set(w, keys, transform=None):
