@@ -114,80 +114,92 @@ class LinkParser(HTMLParser):
 # Hints used to match discovered hrefs/link-text to config sections.
 # The JetPort 5601 web UI tabs are named: General, Security, Networking,
 # Notification, Firmware, Save/Load — and Port Serial Settings / Service Mode.
+# "overview" is intentionally absent from "basic": it's a read-only status page.
 SECTION_HINTS = {
-    "basic":   ["general","basic","setting","config","system","server_basic","sysname","devname","overview"],
+    "basic":   ["general","basic","setting","config","system","server_basic","sysname","devname"],
     "network": ["networking","network","netconfig","ip_config","ipaddr","ethernet","lan"],
-    "port":    ["serial","port","serial_setting","serialsetting","com","uart","portconf","baud"],
-    "service": ["service","mode","servicemode","vcom","virtual","tcpserver","tcp","udp","operation"],
+    "port":    ["serial","serial_setting","serialsetting","port_serial","portserial","com","uart","baud"],
+    "service": ["service","servicemode","service_mode","vcom","virtual","tcpserver","tcp","udp","operation"],
     "acl":     ["security","acl","access","filter","ipfilter","firewall"],
     "notify":  ["notification","notify","event","alert","snmp","email","syslog","trap"],
-    "save":    ["save","saveload","reload","restart","reboot","factory","default","firmware","upgrade","restore"],
+    "save":    ["save","saveload","savereload","save_reload","reload","restart","reboot","factory","firmware","upgrade","restore"],
 }
 
 # Fallback URL candidates tried in order when auto-discovery finds nothing.
-# Ordered so the names the JetPort 5601 manual actually uses come first.
+# The device uses /cgi-bin/*.cgi paths (confirmed: /cgi-bin/overview.cgi exists).
+# CGI paths come first; .asp / .htm guesses follow as a last resort.
 FALLBACK_URLS: dict[str, list[str]] = {
     "basic": [
-        # Exact tab name from manual: "General"
+        # CGI paths — confirmed device uses /cgi-bin/ scheme
+        "/cgi-bin/general.cgi","/cgi-bin/General.cgi",
+        "/cgi-bin/basic.cgi","/cgi-bin/server.cgi","/cgi-bin/config.cgi",
+        # Exact tab name from manual: "General" / "Basic Setting"
         "/General.asp","/general.asp","/General.htm","/general.htm",
-        # Overview page has a "Basic Setting" link
         "/Basic_Setting.asp","/basic_setting.asp","/Basic_Setting.htm","/basic_setting.htm",
-        # Other common guesses
         "/server_basic.asp","/server_basic.htm",
         "/basic.asp","/basic.htm","/server.asp","/server.htm",
         "/system.asp","/system.htm","/config.asp","/config.htm",
-        "/overview.asp","/overview.htm",
-        "/cgi-bin/general.cgi","/cgi-bin/basic.cgi","/cgi-bin/server.cgi",
     ],
     "network": [
-        # Exact tab name from manual: "Networking"
+        # CGI paths first
+        "/cgi-bin/networking.cgi","/cgi-bin/Networking.cgi",
+        "/cgi-bin/network.cgi","/cgi-bin/ip.cgi","/cgi-bin/netconfig.cgi",
+        # Exact tab name from manual: "Networking" / "Network Setting"
         "/Networking.asp","/networking.asp","/Networking.htm","/networking.htm",
-        # Overview page has a "Network Setting" link
         "/Network_Setting.asp","/network_setting.asp","/Network_Setting.htm","/network_setting.htm",
-        # Other common guesses
         "/server_network.asp","/server_network.htm",
         "/network.asp","/network.htm","/ip.asp","/ip.htm",
         "/ip_config.asp","/ip_config.htm","/netconfig.asp","/netconfig.htm",
         "/ethernet.asp","/ethernet.htm",
-        "/cgi-bin/networking.cgi","/cgi-bin/network.cgi","/cgi-bin/ip.cgi",
     ],
     "port": [
+        # CGI paths first
+        "/cgi-bin/serial_setting.cgi","/cgi-bin/serialsetting.cgi",
+        "/cgi-bin/port_serial.cgi","/cgi-bin/serial.cgi","/cgi-bin/port.cgi",
         # Exact tab name from manual: "Serial Settings" / "Port Serial Settings"
         "/Serial_Settings.asp","/serial_settings.asp","/Serial_Settings.htm","/serial_settings.htm",
         "/Port_Serial.asp","/port_serial.asp","/Port_Serial.htm","/port_serial.htm",
         "/serial.asp","/serial.htm","/port.asp","/port.htm",
-        "/port1.asp","/port1.htm",
-        "/serial_setting.asp","/serial_setting.htm",
+        "/port1.asp","/port1.htm","/serial_setting.asp","/serial_setting.htm",
         "/com1.asp","/com1.htm","/uart.asp","/uart.htm",
-        "/cgi-bin/serial.cgi","/cgi-bin/port.cgi",
     ],
     "service": [
+        # CGI paths first
+        "/cgi-bin/service_mode.cgi","/cgi-bin/servicemode.cgi",
+        "/cgi-bin/port_service.cgi","/cgi-bin/service.cgi","/cgi-bin/mode.cgi",
         # Exact tab name from manual: "Service Mode" / "Port Service Mode"
         "/Service_Mode.asp","/service_mode.asp","/Service_Mode.htm","/service_mode.htm",
         "/Port_Service.asp","/port_service.asp","/Port_Service.htm","/port_service.htm",
         "/service.asp","/service.htm","/mode.asp","/mode.htm",
         "/vcom.asp","/vcom.htm","/operation.asp","/operation.htm",
-        "/tcp_server.asp","/tcp_server.htm","/tcpserver.asp",
-        "/cgi-bin/service.cgi","/cgi-bin/servicemode.cgi","/cgi-bin/mode.cgi",
+        "/tcp_server.asp","/tcp_server.htm",
     ],
     "acl": [
+        # CGI paths first
+        "/cgi-bin/security.cgi","/cgi-bin/Security.cgi",
+        "/cgi-bin/acl.cgi","/cgi-bin/filter.cgi","/cgi-bin/access.cgi",
         # Exact tab name from manual: "Security"
         "/Security.asp","/security.asp","/Security.htm","/security.htm",
         "/ip_filter.asp","/ip_filter.htm","/acl.asp","/acl.htm",
         "/access.asp","/access.htm","/filter.asp","/filter.htm",
         "/firewall.asp","/firewall.htm",
-        "/cgi-bin/security.cgi","/cgi-bin/acl.cgi","/cgi-bin/filter.cgi",
     ],
     "notify": [
+        # CGI paths first
+        "/cgi-bin/notification.cgi","/cgi-bin/Notification.cgi",
+        "/cgi-bin/notify.cgi","/cgi-bin/event.cgi","/cgi-bin/port_notification.cgi",
         # Exact tab name from manual: "Notification"
         "/Notification.asp","/notification.asp","/Notification.htm","/notification.htm",
         "/notify.asp","/notify.htm","/event.asp","/event.htm",
         "/alert.asp","/alert.htm","/snmp.asp","/snmp.htm",
         "/email.asp","/email.htm","/syslog.asp","/syslog.htm",
         "/Port_Notification.asp","/port_notification.asp",
-        "/cgi-bin/notification.cgi","/cgi-bin/notify.cgi","/cgi-bin/event.cgi",
     ],
     "save": [
+        # CGI paths first
+        "/cgi-bin/save_reload.cgi","/cgi-bin/savereload.cgi",
+        "/cgi-bin/save_restart.cgi","/cgi-bin/saverestart.cgi",
+        "/cgi-bin/save.cgi","/cgi-bin/reboot.cgi","/cgi-bin/firmware.cgi",
         # Exact label from manual: "Save / Reload" and "Save / Restart"
         "/Save_Reload.asp","/save_reload.asp","/SaveReload.asp","/savereload.asp",
         "/Save_Restart.asp","/save_restart.asp","/SaveRestart.asp","/saverestart.asp",
@@ -196,7 +208,6 @@ FALLBACK_URLS: dict[str, list[str]] = {
         "/Firmware.asp","/firmware.asp","/Firmware.htm","/firmware.htm",
         "/upgrade.asp","/upgrade.htm","/restore.asp","/restore.htm",
         "/factory.asp","/factory.htm",
-        "/cgi-bin/save.cgi","/cgi-bin/savereload.cgi","/cgi-bin/reboot.cgi",
     ],
 }
 
@@ -378,10 +389,15 @@ class DeviceConnection:
             fp = FormParser(); fp.feed(html)
             if fp.forms:
                 f = fp.forms[0]
+                # Skip pages that return a form but have no editable fields —
+                # overview/status pages often do this (e.g. /cgi-bin/overview.cgi).
+                if not f["fields"] and not f["hidden"]:
+                    self._log(f"Skipping {u}: form has no fields (status/overview page?)")
+                    continue
                 action = f["action"] or u
                 if not action.startswith("/"): action = "/" + action
                 self._section_urls[section] = u   # remember working URL
-                self._log(f"Loaded section '{section}' from {u}: {len(f['fields'])} fields")
+                self._log(f"Loaded section '{section}' from {u}: {len(f['fields'])} fields, {len(f['hidden'])} hidden")
                 return action, f["fields"], f["hidden"]
         self._log(f"Could not load section '{section}'")
         return None, {}, {}
