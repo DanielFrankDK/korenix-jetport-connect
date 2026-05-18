@@ -1,0 +1,680 @@
+Korenix JetPort 5601 / 5601f Serial Device Server
+User's Manual
+July 2009 (V1.3)
+korenix
+www.korenix.com
+ 
+Korenix JetPort 5601 / 5601f Serial Device Server User's Manual
+Copyright Notice Copyright © 2009 Korenix Technology Co., Ltd.
+All rights reserved.
+Reproduction in any form or by any means without permission is prohibited.
+Contents
+Chapter 1
+Chapter 2
+Chapter 3
+Chapter 4
+Appendix A Appendix B
+igiigefe|tfelel E Rm a 1-1 Serial to Ethernet Technology Overview ............ccccccsseeeceeceeeeeeeeeessueeeeeeeeaaaeeeees 1-2 l E Ui © TUN EN 1-2 Product SpeCiliCaliOnitxc.nu m 1-2 Package Eege 1-4
+Hardware Installation:.......................................... ecce eere rere nnn 2-1 Panel anda BEDS. EE 2-2
+5601 Panel and Interfaces... reae ENEE SEO 2-2 5601 RR ee Tee EE 2-2 5601f Panel and Interfaces. ...........c.cccccccecececececccecececeneaeaeececeaeatsceneneueneaeenenes 2-3 SGOT RED rn elei Ce REN 2-3 misi miUe] EEA RR TERRENI 2-4 Connecting the ower... 2-4 Connecting the ING EW OI Ee 2-4 Connecting the Serial DEVICE nennen 2-4
+Windows Management Tool................................................- RE EEN RE eee 3-1
+EE 3-2 Install JetPort Commander.,, 3-2
+Web and Telnet Gesell eebe 4-1
+Web COM SO e A waren terre ire sare wares aioe Loue EE 4-2 Kee le e EE 4-2
+Port Configuration- Serial Parameter... 4-4
+Service Mode- Virtual COM. 4-5
+Service Mode TCP Genver 4-5
+Service Mode- TCP Client.............. eese mme nmn ees 4-6
+Service Mode- UJDPB.. «iouis ee EE e Ede ebrei ee 4-6
+Access" ||P TAD eyes doses cite tactus neat fes nacen: ie fuic re ct ee Ried DER wed E set 4-7
+VENICE d lee te lt e nesena EE 4-8
+Email and SNMP Trap Notification ........................seeeeeseeeeeeeeeennennnn 4-8
+eim EE geen ee ee RET eee eee eee 4-9
+SSH e R9 usne aa T TE 4-9 Mew ES GE 4-9 Segre mec X 4-12
+SNMP MIB Il and RS232 Like Support ................................................... A-1 H5232 PIN Ee el E E B-1
+1
+Introduction
+Jetport 5601 series is a smart one RS-232/422/485 to Ethernet serial device server. It includes JetPort 5601 and 5601f. JetPort 5601 is one-port RS232/422/485 to Redundant Ethernet oolution. It's the first serial device server with redundant dual Ethernet ports, the ports can auto-recovery in less than 200ms. JetPort 5601f is one-port RS232/422/485 to Fiber Ethernet Solution. 5601f-m supports one Multi-mode fiber port. 5601f-s supports one Single-mode Fiber port.
+JetPort serial device server connects the serial port of devices such as card readers, measurement devices, or data acquisition terminals, over Ethernet just like locally attached. It eliminates the limitation of single host and transmission distance of traditional serial communications by creating access for multiple hosts in Ethernet. The compact size and various mounting options further create installation flexibility.
+This chapter describes:
+B Serial to Ethernet Technology Overview B Product features
+B Product specification
+B Package checklist
+Serial to Ethernet Technology Overview
+Korenix JetPort serial device servers provide perfect solution to manage serial devices via Ethernet in flexible ways, such as TCP server, TCP client, UDP, or Windows virtual COM. JetPort creates a transparent gateway for the serial communication to Ethernet. If the control program uses network standard API, you can choose TCP or UDP as the communication protocol. If the control program uses COM port, you can install the Windows driver to add virtual COM ports.
+Product Features
+JetPort 5601/5601f has the following features:
+Smart one-port RS232/422/485 to Ethernet Solution
+Redundant Dual Ethernet Ports, Auto-Recovery in Less Than 200ms (JetPort 5601)
+One Multi-mode / Single-mode fiber (JetPort 5601f)
+World's highest serial speed: 460.8kbps
+Supports Secured Management by HTTPS and SSH
+JetPort Commander, Windows utility for auto discovery, multiple device setting and monitoring.
+Versatile serial operation options: Virtual Com, Serial tunnel, TCP server, TCP client, UDP
+Max. 5 Virtual COM, TCP server, TCP client connections
+Event warning by Email, SNMP trap, Syslog and Beeper
+Virtual COM driver for Windows NT/2000/XP/2003
+Product Specification
+1-2
+Network Interface
+Ethernet 2* 10/100BaseTX, Redundant Ethernet (JetPort 5601) 100BaseFX Multi-mode (JetPort 5601f-m) 100BaseFX Single-mode (JetPort 5601f-s)
+Ethernet Connector RJ45 (JetPort 5601)
+Fiber Connector 100BaseFX: Duplex SC (JetPort 5601f)
+Fiber Cable Multi-mode Fiber: 50/125um or 62.5/125um, max. distance 2KM (JetPort 5601f-m) Single-mode Fiber: 8/125um, 9/125um or 10/125um, max. distance 30KM (JetPort 5601f-s)
+Fiber Transceiver JetPort5601f-m, Multi-mode: 2KM max. distance
+Wave-length: 1310nm Min Tx Power:-19dBm Max Tx Power:-14dBm
+JetPort 5601 Serial Device Server User's Manual
+Protection
+Protocols
+Serial Interface Interface Connectors Data Rates
+Data Bits
+Parity
+Stop Bits RS-232
+RS-422
+RS-485 (4-wire) RS-485 (2-wire) Flow Control Serial Line Protection Software Utility Utility
+Introduction
+Min Rx Sensitivity:-30dBm Link budget:11dBm JetPort5601f-s, Single-mode: 30KM max. distance Wave-length:1310nm Max Tx Power:-8dBm Min Tx Power:-15dBm Min Rx Sensitivity:-34dBm Link budget:19dBm Built-in 1.5 KV magnetic isolation ICMP, IP, TCP, UDP, DHCP, BootP, ARP / RARP, DNS, SNMP MIB II, HTTPS, SSH
+RS232, RS422, 2/4-Wire RS485 male DB9
+110 bps to 460.8 Kbps
+5, 6, 7, 8
+odd, even, none
+1, 1.5, 2
+TxD, RxD, RTS, CTS, DTR, DSR, GND, DCD Tx+,Tx-, Rx+, Rx-,GND
+Tx+,1Tx-, Rx+, Rx-,GND
+Data+, Data-,GND
+XON/XOFF, RTS/CTS, DTR/DSR 15KV ESD
+JetPort Commander for Windows 2000/XP Device discovery
+Auto IP report Device setting (run-time change, no rebooting)
+Access control list
+e
+e
+e
+e
+e Group setting
+@ Device monitoring e Serial port monitoring € Log info
+e
+Group Firmware update batch
+JetPort 5601 Serial Device Server User's Manual 1-3
+Serial mode
+Multiple link Virtual Com
+Configuration
+Power Requirements
+Power Input Power Line protection Mechanical Dimensions
+Regulatory Approvals
+Environmental
+Operating Temperature
+Operating Humidity
+Storage Temperature
+Package Checklist
+Virtual Com / TCP Server / TCP Client / UDP / Serial Tunnel e TCP Alive Check Timeout
+e Inactivity Timeout e Delimiter for Data Packing e
+Force TX Timeout for Data Packing
+5 Hosts simultaneous connection: Virtual Com / TCP server / TCP Client Windows 2000/XP/2003
+Web HTTPS console, Telnet SSH console,
+JetPort Commander for Windows 2000/XP
+PWR1: 12~48VDC in 2-pin Terminal Block
+PWR2: 9~30VDC in Power Jack with Power Adapter e  1KV Burst (EFT), EN61000-4-4
+e 0.5 KV Surge, EN61000-4-5
+29.6 mm (H) x 96 mm(W) with ears x 99 mm (D) FCC Class A, CE Class A RoHS
+-10 to 70°C (14 to 158*?F) 5% to 95% (Non-condensing) -20 to 85 C (-4 to 185 F)
+JetPort is shipped with the following items:
+4 Foot pads
+Korenix JetPort Serial Device Server 100-240V Power adapter
+Mounting kit and 4 screws
+Documentation and Software CD B Quick Installation Guide
+ 
+If any of the above items is missing or damaged, please contact your local sales representative.
+JetPort 5601 Serial Device Server User's Manual
+2
+Hardware Installation
+JetPort serial device server can be configured by Windows utility, web browser, or Telnet console. Advanced management features include SNMP support and Email alert. JetPort Commander is a powerful Windows utility that supports device discovery, group setup, group firmware update, and monitoring functions.
+This chapter introduces how to quick start JetPort Panel and LED
+Reset Button
+Connecting the Power
+Connecting the Network
+Connection the Serial Device
+Din-Rail Mounting Installation
+Panel and LEDs
+5601 Panel and Interfaces
+         
+PWR 1: Terminal Block, 12-48VDC (V+ / V- / GND)
+JetPort 5601
+Redundant Dual 10/100M Ethernet,
+Auto-Recovery < 200ms Auto MDI/MDIX
+Built-in 1.5 KV magnetic isolation
+              
+ 
+           
+ 
+        
+PWR 2: Power Jack. 9~30 VDC
+     
+  
+Ethi Eth2 PWR2 PWRI1
+          
+PWR!1: Power 1 LED PWR2: Power 2 LED Ethernet 1 Link/Act LED Ethernet 2 Link/Act LED Serial TX/RX LED
+                          
+Mounting kit 12
+Long Distance RS422/485
+          
+H/W Reset Button Reset IP address and configuration to default
+         
+1 RS-232/422/485 port, DB9 15 KV ESD for all signals
+110 bps to 460.8 Kbps 120ohm Termination
+   
+5601 LED Indicators
+There are 5 LEDs in 5601, indicating real-time system status.
+On: Power 1 is on and booting up.
+Blinking: Indicates an IP conflict, or DHCP or BOOTP server did not respond properly.
+On: Power is on and functioning normally.
+Blinking: Located by Administrator's Location function.
+Power is off, or power error condition exists.
+On: Power 2 is on and booting up.
+Blinking: Indicates an IP conflict, or DHCP or BOOTP server did not respond properly.
+On: Power 2 is on and functioning normally.
+Blinking: Located by Administrator s Location function.
+ower is off, or power error condition exists
+range Blinking: 10 Mbps Ethernet connection
+ff
+O O reen O O
+G Green Blinking: 100 Mbps Ethernet connection
+ 
+Ethernet cable is disconnected, or has a short.
+Off Ethernet cable is disconnected, or has a short
+2-2 JetPort 5601 Serial Device Server User's Manual
+Quick Start
+Red [Serial port is receiving data.
+Orange [Serial port is continuously transmitting and receiving data. Of ^ [No data is being transmitted or received through the serial port.
+ 
+5601f Panel and Interfaces
+             
+      
+  
+PWR 1: Terminal Block, 12-48VDC (V+ / V- / GND)
+JetPort 5601f
+100BaseFX: Duplex SC Multi-mode or Single-mode Fiber
+        
+                               
+     
+TX PWR2 PWRI1 PWR 2: Power
+Jack. 9~30 VDC
+  
+PWR1: Power 1 LED PWR2: Power 2 LED Fiber Link/Act LED serial TX/RX LED
+  
+Long Distance RS422/485
+H/W Reset Button Heset IP address and configuration to default
+       
+        
+   
+1 RS-232/422/485 port, DB9 15 KV ESD for all signals 110 bps to 460.8 Kbps
+      
+       
+120ohm Termination
+5601f LED Indicators
+There are 4 LEDs in 5601f, indicating real-time system status.
+On: Power 1 is on and booting up.
+Blinking: Indicates an IP conflict, or DHCP or BOOTP server did not respond properly.
+Gem Oh Power is on and functioning normally.
+Green nM Located by Administrator's Location function.
+Power is off, or power error condition exists.
+On: Power 2 is on and booting up. Blinking: Indicates an IP conflict, or DHCP or BOOTP server did not
+respond properly.
+Gem EI Power 2 is on and functioning normally. id Located by Administrator s Location function.
+Gomm Gs port is transmitting data.
+Of ^ [o data is being transmitted or received through the serial port.
+Green
+ 
+JetPort 5601 Serial Device Server User’s Manual 2-3
+Reset Button
+The Reset button provides users with a quick and easy way to restore the default settings of JetPort. Press reset button for 10 seconds. Release after Power LED blinking red. JetPort will restore to default value including default IP address (192.168.10.2), and no password. When the Power LED turns green, the device is ready to function.
+Connecting the Power
+Terminal Block (PWR1):
+1. Insert the positive and negative wires of your DC supply into the V+ and V- contacts of the terminal block connector.
+ 
+(GND / V- / V+)
+2. Tighten the terminal screws to prevent the DC wires from coming loose.
+ 
+Power Jack(PWR2):
+Connect the power jack input with the enclosed 12VDC power adapter, or 24VDC power input. The power LED will show red color until the system is ready. If the IP setting is running correctly, the power LED will turn green.
+Note: If the 2 power inputs are connected (PWR 1, PWR 2), the JetPort 5601 will be powered from the highest connected voltage. The unit will not alarm for loss of DC IN power, the alarm function only applies to loss of power at PWR1 or PWR2.
+Connecting the Network
+JetPort 5601
+Connect the Ethernet cable to the JetPort 5601 10/100M Ethernet port 1, 2 or both. The interfaces support auto MDI/MDIX. If both of the Ethernet port 1 and 2 are connected when startup device, the Ethernet port 1 will be the master port, Ethernet port 2 will be the backup. But, if Ethernet port 2 is attached first before attach port 1, the Ethernet port 2 will remain the master port.
+JetPort 5601f
+Connect the Multi-mode/Single-mode fiber to the JetPort 5601f. The fiber connector support 100BaseFX, Duplex SC. The fiber cable supports 50/125um or 62.5/125um for 5601f-m; 8/125um, 9/125um or 10/125um for 5601f-s. The maximum distance of JetPort 5601f-m is 2KM, 5601f-s is 30KM.
+Connecting the Serial Device
+2-4 JetPort 5601 Serial Device Server User's Manual
+Quick Start
+JetPort 5601 serial port is a standard DB9 male port. Connect the serial device to the unit DB9 male port by the pin assignment table. The Long-Range Termination switch can configure 120ohm termination for RS422/4-wire RS485/2-wire RS485.
+Pin Assignment
+12345
+ 
+6789 Pin # RS232 RS422 RS485 (4 wire) RS485(2 wire)
+1 DCD RXD- RXD- 2 RXD RXD+ RXD+ 3 TXD TXD+ TXD+ DATA+ 4 DTR TXD- TXD- DATA- 5 GND GND GND GND 6 DSR 7 RTS 8 CTS 9 RI
+*RS232 mode act as DTE
+ 
+1200hm DIP DIP 1 DIP 2 1200hm Termination Configuration ON ON 120ohm Terminator for Long Distance 4-wire RS485/RS422 ON OFF --- OFF ON 120ohm Termination for Long Distance 2-wire RS485 OFF OFF No Termination for RS232/485 (short distance)
+Din-Rail Mounting Installation
+Follow these steps to mount the unit to the rail/track.
+JetPort 5601 Serial Device Server User’s Manual 2-5
+1. Use a screwdriver to secure the Din-Rail mounting kit to the ear.
+  
+Wall-Mounting Kits.
+2. Lightly push the 5601 into the rail/track.
+ 
+The figures show the 5601 is attached on the rail/track well.
+3. To remove the unit from the rail/track, reverse steps 1-3.
+Notice: Due to the safety concern, Korenix requests users to vertically mount the 5601 device to the rail when using the Terminal Block as the power input. Use the certificated power supply, assured power
+construction in your factory as the power source.
+2-6 JetPort 5601 Serial Device Server User's Manual
+3
+Windows Management Tool
+JetPort serial device server provides powerful Windows management tool for multiple device management.
+Below are the major functions in JetPort Windows Commander. This chapter introduces you the Software Quick Setup. You can know how to install the JetPort Commander and setup the vitual COM mode.
+The “JetPort Commander Manual” introduces the full configuration of JetPort commander. You can find the document in product CD or download from Korenix web site.
+B Server Configuration Broadcast Configuration General
+Locate
+Security Networking Notification Management
+Firmware Update
+VV NW ON ON ON ON ON ON WV
+Save / Reload B Port Configuration > Port Serial Settings > Port Service Mode > Port Notification B Setup Wizard Virtual COM Wizard Serial Tunnel Wizard Group IP Wizard Group Setup Wizard
+Y V V WV
+> Group Firmware Wizard B = IP Collection B Monitor
+Software Quick Setup
+JetPort Commander is an easy-to-use utility with auto device discovery in a LAN or adding devices on the public network. All of the configurations on the serial server can be done in the JetPort Commander. You can also apply configurations of one serial server to the other serial servers. This document shows you how to quick setup the software. The full functions and configurations' description, please refer to the JetPort Commander Manual which you can find in the CD or download from Korenix web site.
+Install JetPort Commander
+1. Insert the CD and auto-run the program. If the setup does not auto-run, select “JetPort 5601", and "Operation System”, run JetPort Setup.exe to install Windows utility, JetPort Commander.
+Ja Installing JetPort Commander
+If vou have installed previous version of JetPort Commander, please close 1t first before continuing.
+Destination Directory
+[C:Program Files*JetPart Commander
+" ` Required: 4583 K z n E Available: 3072492 K Ee | ==
+ 
+2. When the installation is finished, there are three options: Y Launch JetPort Commander Now: Start configurations. Y Visit Korenix registration page: Register products to Korenix.
+Y Launch JetPort later: Start configurations later.
+ 
+3. Broadcast the JetPort unit: JetPort Commander will broadcast the network and search all available JetPort units in the network. The default IP address of JetPort is *192.168.10.2".
+ 
+Product Tip: If you have multiple Network Adapters (i.e. wireless and wired), please activate ONLY ONE Network Adapter that can locate the JetPort devices, and CLOSE the rest Network Adapters. Otherwise, JetPort Commander may broadcast INCORRECTLY.
+~ wm — — wm — wm ^
+3-2 JetPort 5601 Serial Device Server User's Manual
+Windows Management Tool
+Broadcast Searching ERENEBBHEOEHHSEERSHEHEHSHUHUNHESHHEHEEZE New Devices
+v 192.165.16.1 00:BB:CC:DD:E2:00, Click "checked" to assign a valid IP..
+ 
+MAC [00:1 27751222345 Original IP fi 932.168.10.2
+W Using Static IPF [| Using DHCP
+Metmask [255.255.255.0 — — D abaiau (192168102 O00 Dë Ir Dez [OO
+Cancel Clear All Select À | pA Auto Scan
+wx A lot of IPs need to be re-config? Click here | r | = Your best choice. Network Setup Wizard. | SEE
+ 
+4. Configuring the JetPort unit:
+4.1 Click on the JetPort unit and select “Add” for further configuring the unit.
+4.2 Select "Static IP” if you want to specify the network parameters, or select “DHCP”, or “BootP” if you want dynamic configuration for the JetPort unit.
+5. Configuring the serial port as COM port: 5.1 Go to "Configuration", and choose the “device” and the "port". Select "Serial Settings" to
+configure the serial parameters
+(9 JetPort Commander
+File Device Configuration COM C curation Help
+IT ] alive BI | warning E not available
+JetPortb201 Alive, Logged in
+Monitor -4*. Setup Wizard ix. Virtual COM Wizard Service Mode | Notification | Šk Group Setup Wizard — Group Firmware Wize jx. Serial Tunnel Wizard) Part Alias Parti
+2. Group IP Wizard Baudrate [460800 +| StopBits — | r | Performance [Throughput -|
+   
+part]
+ 
+Ai IP Collection ' System Log
+Parity No ~| Flow Control [No Ela -| | Data Bit [8 -| Interface Ee |
+ 
+5.2 Select "Service mode" , "Virtual COM Mode" and press "Map Virtual COM" to map the port to the COM port.
+JetPort 5601 Serial Device Server User's Manual 3-3
+         
+Serial Settings | Service Mode f Notification | part | Service Mode [Virtual COM Mode -| }
+Virtual COM Mode |
+Select a Virtual COM Name
+      
+Virtual COM 5 etting
+   
+ 
+AY Map Virtual COM
+   
+ 
+Multilink |
+Max Connections | ] - |
+Destination Host VUM Name
+1 | Wating For VUM connect kd | | Waiting Far VUM connect Lancel | Uk. |
+Congratulations! You have finished JetPort configurations with Virtual COM mode. You can also use web or telnet console by the JetPort IP address.
+ 
+JetPort 5601 Serial Device Server User’s Manual
+4
+Web and Telnet Console
+In addition to Windows utility, JetPort 5601 can also be managed by Web-HTTPS and the SSH Console.
+The HTTPS is a security protocol that provides communication privacy over the internet. The HTTPs packets transmitted between the JetPort and PC would be encrypted.
+The SSH allows users to securely login to remote host computers, to execute commands safely in a remote computer, to securely copy remote files and to provide secure encrypted and authenticated communications between tow non-trusted hosts.
+This chapter describes: B  HTTPS Console > ` Server Configuration > . Port Configuration > Management >  Save/ Restart B SSH Console > . SSH Client
+> Configuration
+Web Console
+When the JetPort has been configured with proper IP address and the web management is enabled, you can use web browser to make further configurations.
+Type JetPort's IP address in the Address input box, for example https://192.168.10.2 (Note: you can just type http://, this is not allowed in HTTPS. Your should type https://.)
+ 
+ 
+48] hitps/192.168.10.2 v
+If the JetPort is password protected, use the pre-assigned password to login first.
+   
+ 
+e ` | a korenix oT, Password Protected
+Pass ee |
+Submit
+Goto Korenix = Help
+korenix | OSSA
+Welcome to JetPort Web Commander
+ 
+Server Overview Configuration Model JetPart&bl11 Basic Setting Network Setting IP Address 192.168.10.2 Change Password
+Port Configuration Firmware Version 1.03e
+MAC Address 00:00:56:01:02:08
+Management Save / Restart
+The overview page lists the basic information of this JetPort device.
+Server Configuration
+Basic Setting configures Server name, Time Server, and Telnet console enable/disable.
+4-2 JetPort 5601 Serial Device Server User's Manual
+Web and Telnet Console
+Welcome to JetPort Web Commander
+Basic Setting Name [JETPORT5BDT-DEFAULT Time Time Zone (SMT+08:00) Taipei hi
+Local Time [Thu Jan 1 08:04:39 1970 Time Server [pool.ntp. org Port [123
+Console Telnet Console f Enable © Disable
+Submit |
+Network Setting configures the IP address, netmask, gateway, and DNS server for the JetPort. Auto IP report is for dynamic IP address reporting in defined intervals.
+Network Setting
+IP Configuration [Static >|
+IP Address [im216810.2 —— — Netmask [255.255.2550 — — Gateway 92168103 ——— DNS Server 1 CESE DNS Server 2 [  —
+Auto IP Report
+Auto Report to IP | Auto Report to TCP Port [n
+Auto Report Interval [n seconds
+You can also define Administration password to protect the JetPort from unauthorized modification. Avoid using space in password.
+Change Password
+Old Password | Hew Password | Confirm New Password |
+Subrmit |
+JetPort 5601 Serial Device Server User's Manual 4-3
+Port Configuration- Serial Parameter
+4-4
+Port Configuration covers Serial Parameter settings, such as baud rate, data bits, stop bits, parity, and flow control.
+Port Alias: Remark the port to hint the connected device. Baud rate: from 110bps to 460.8kbps Parity: No, Even, Odd, Mark, Space Data Bits: 5, 6, 7, 8 Stop Bits: 1, 2 (1.5) Flow Control: No, XON/XOFF, RTS/CTS, DTR/DSR Interface: RS232 / RS422 / RS485(2-wires) / RS485(4-wires) Performance: Throughput, Latency Throughput mode guarantees highest transmission speed Latency mode guarantees shortest response time
+For advanced data packing options, you can specify delimiters for Serial to Ethernet and / or Ethernet to Serial communications.
+You can define max. 4 delimiters (00^ FF, HEX) for each way. The data will be hold until the delimiters are received or the optional “Flush Ethernet to Serial data buffer" times out. Zero means disable(factory default).
+Serial Setting
+Port
+Port Alias Pot | Interface [R5237 el
+    
+       
+Baud Rate
+Data Bits RS405(2-wires) R5405 GIE
+Stop Bits
+Parity [None sl Flow Control [None | Force TX Interval Time [n ms
+Performance Throughput © Latency
+Port Profile Forti Local TCP Port 4000 Command Port Deg Vode Serial to Ethernet
+Flush Data Buffer After [n ms Delimiter(Hex Um 1 [00 dk 3:00 o
+Mode Ethernet to Serial
+|
+Flush Data Buffer After |Ü ms
+Es lon 3: [nn A [nn submit |
+—. i c
+Delimiter(Hex 0~ff
+JetPort 5601 Serial Device Server User's Manual
+Web and Telnet Console
+Force TX interval time is to specify the timeout when no data has been transmitted. When the timeout is reached or TX buffer is full (4K Bytes), the queued data will be sent. Zero means disable(factory default).
+Service Mode- Virtual COM
+In Virtual COM mode, you need to define the available port number, Idle timeout, Alive check, and Max. connections allowed from 1 to 5.
+Service Mode
+Porti
+Service Mode [virtual COM Mode | Idle Timeout [n ([]--55535)seconds
+Alive Check [420 (D --55535)seconds Max Connection E ~] max. connection (1-5)
+submit |
+Idle Timeout: When serial port stops data transmission for a defined period of time (de Timeout), the connection will be closed and the port will be freed and re-try for connection with other hosts. Zero is disable this setting (default). If Multilink is configured, only the first host connection is effective for this setting.
+Alive Check: The JetPort device will send TCP alive check package in each defined time interval (Alive Check) to remote host to test the TCP connection. If the TCP connection is not alive, the connection will be closed and the port will be freed for other hosts. Zero is disable this setting (default).
+Service Mode- TCP Server
+In TCP Server mode, you need to define the available port number, Idle timeout, Alive check, and Max. connections allowed from 1 to 5.
+Service Mode
+Porti
+Service Mode [TCP Server Made -| TCP Server Port (4000 Idle Timeout |n (U~65535)} seconds
+Alive Check [420 (D -55535)seconds Max Connection fi | max. connection{1~5)
+| Submit |
+Idle Timeout: When serial port stops data transmission for a defined period of time (de Timeout), the connection will be closed and the port will be freed and re-try for connection with other hosts. Zero is disable this setting (default). If Multilink is configured, only the first host connection is effective for this setting.
+JetPort 5601 Serial Device Server User's Manual 4-5
+Alive Check: The JetPort device will send TCP alive check package in each defined time interval (Alive Check) to remote host to test the TCP connection. If the TCP connection is not alive, the connection will be closed and the port will be freed for other hosts. Zero is disable this setting (default).
+Service Mode- T CP Client
+In TCP Client mode, you need to define the destination host IP and port number, Idle timeout, Alive check. To deploy multilink, specify up to 4 more hosts IP and Port number.
+Service Mode
+Port
+Service Mode [TCR Client Made -| Destination Host [0.0.0.0 [s000 Idle Timeout [n (LI--55535)]seconds
+Alive Check [420 (O~G5535 seconds Connect on @ Startup C Any Character Destination Host Port
+(pono hess - „booo Fees booo Fees ahoo Ee:
+Submit |
+Idle Timeout: When serial port stops data transmission for a defined period of time (de Timeout), the connection will be closed and the port will be freed and re-try for connection with other hosts. Zero is disable this setting (default). If Multilink is configured, only the first host connection is effective for this setting.
+Alive Check: The JetPort device will send TCP alive check package in each defined time interval (Alive Check) to remote host to test the TCP connection. If the TCP connection is not alive, the connection will be closed and the port will be freed for other hosts. Zero is disable this setting (default).
+Connect on Startup: The TCP Client will build TCP connection once the connected serial device is startup.
+Connect on Any Character: The TCP Client will build TCP connection once the connected serial device starts to send data.
+Service Mode- UDP
+4-6
+In UDP mode, you need to define the destination host IP and Local listen port number.
+To create more destination hosts, specify the IP range of destination IP and send port number.
+JetPort 5601 Serial Device Server User's Manual
+Web and Telnet Console Service Mode
+Forti
+Service Mode [UDF Made -| Listen Port [4000
+Host start IP Host end IP send Port
+Submit |
+Access IP Table
+The Access IP Table specifies the IP address and subnet that can access to the device. The access is based on IP and netmask combination.
+If the access is open to all hosts, do NOT enable this function. Access IP Setting
+[^ Enable IP Filtering (Not check this option will allow any IP to have assessibility)
+Hn. Activate the IP IP Address Netmask
+1 E fo fo 2 m [| [ 3 S [ [ |] 4 m pO fo 5 P Ir [ 6 P Ir [| 7 m fo [ ë e 8 z NEN fo 9 E pO fo 10 r [. n r [ Sd 12 n fo [oo 13 r P 14 m fo fo 15 P Ir [ 16 E Poo [ E
+JetPort 5601 Serial Device Server User's Manual 4-7
+Event Notification
+Specify the events that should be notified to the administrator. The events can be alarmed by means of email, SNMP trap, or system log.
+4-8
+Device Notification:
+»
+Y VV ON ON WV
+»
+Hardware Reset (Cold Start): Rebooting the JetPort will trigger the event Software Reset (Warm Start): Restarting the computer will trigger the event Login Failed: Using wrong password in console will trigger the event
+IP Address Changed: Changing network setting will trigger the event Password Changed: Changing the password will trigger the event
+Access IP Blocked: Report blocked IP addresses
+Redundant Power Change: Power change will trigger the event
+Redundant Ethernet Change: Ethernet master port change will trigger the event
+Port Notification:
+»
+»
+DCD changed: When DCD (Data Carrier Detect) signal changes, indicating the modem connection status has changed, the event will be triggered.
+DSR changed: When DSR (Data Set Ready) signal changes, indicating that the data communication equipment is powered off, the event will be triggered.
+RI changed: When RI (Ring Indicator) signal changes, indicating the incoming of a call, the event will be triggered.
+CTS changed: When CTS (Clear To Send) signal changes, indicating that the transmission between computer and DCE can proceed.
+Port connected: In TCP Server Mode, when the device accepts an incoming TCP connection, this event will be trigger. In TCP Client Mode, when the device has connected to the remote host, this event will be trigger. In Virtual COM Mode, when Virtual COM is ready to use, this event will be trigger.
+Port disconnected: In TCP Server/Client Mode, when the device lost the TCP link, this event will be trigger. In Virtual COM Mode, When Virtual COM is not available, this event will be trigger.
+Select the events and the type of Email, SNMP Trap or Syslog, click Submit to enable it. Email and SNMP Trap Notification
+Email Server configuration includes the mail server's IP address or domain. If the authentication is required, specify the username and password. There are 4 email addresses you can specify to receive the notification.
+E-mail Settings SMTP Server | Port |
+l My server requires authentication
+User Name KE?
+Password |...
+E-mail Address 1 IB 55 Ñ E-mail Address ? E E-mail Address 3 WS E-mail Address 4 pe
+JetPort 5601 Serial Device Server User’s Manual
+Web and Telnet Console
+SNMP Trap configuration includes up to 4 Trap Servers. You need to at least fill in one Trap Server's IP or domain. The Community is also required information. Do not use the “;” in this column. Location and Contact is optional information.
+SNMP Trap Server
+SNMP Server 1 —_—_—_—SS—S 1 SNMP Server 2 e fi SNMP Server 3 TTT SNMP Server 4 E J Community [. 0] Location | Contact I
+Syslog Server
+Syslog Server IP | Syslog Server Port Ir
+Save / Restart
+Load Factory Default: Load default configuration except Network Settings.
+Import Configuration: Retrieve saved configuration file to apply in the device. Click Browse to choose the configuration file then click the Import command.
+Export Configuration: Save the current configuration into a file and save the file in current host. Upgrade Firmware: Upgrade to new firmware. Click Browse to select the firmware then click Upgrade command.
+SSH Console
+For using SSH, you should open the SSH Client, assign the IP of the JetPort you'd like to access and enter the correct Username/Password, then you can enter the SSH console menu.
+SSH Client
+There are many free, shareware, trial or charged SSH clients you can find in the internet. Fox example, PuTTY is a free and popular Telnet/SSH client, we'll use this tool to tell you how to login the JetPort by SSH. Note: PuTTY is copyright 1997-2006 Simon Tatham.
+Download PuTTY: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+JetPort Settings: Enable the “Telnet Management Enable" to enable the SSH feature of JetPort 5601/5601f. Click "Goto Telnet Management" will ask you to open the SSH client.
+JetPort 5601 Serial Device Server User's Manual 4-9
+ 
+ 
+General | Security | Networking | Notification Update Firmware | SaverLoad M Web Management Enable Goto Web Management |
+Goto Telnet Management |
+ 
+ 
+[ SNMP Management Enable
+After modifying configuration, be sure to validate the changes by using “Apply Only” or “Apply and Save".
+The copyright of PuTTY About Pol TY
+  
+PuTTY Release 0.54
+© 1997-2004 Simon Tatham. All rights reserved.
+View Licence Visit Web Site
+Open the PuTTY
+In the Session sub-tree, enter the Host Name (IP Address of your JetPort) and Port number (default 2 22). Choose the "SSH" protocol.
+In the SSH sub-tree, select the “Enable legacy use of single-DES in SSH2".
+Then click "Open" to start the SSH session console.
+ZG PuTIY Configuration
+Basic options for your PuTTY session Specify your connection by host name or IP address
+18103. — j;
+most | | 192.168 | -— Features Protocol: J- Window Raw OTelnet — OhRlgn ` (55H Appearance -~ Behaviour Translation Selection |
+Load, save or delete a stored session
+saved Sessions
+pM ee ee s
+3 ~ Colours | Default Settings =| Connection
+-— Tunnels : : Close window on exit:
+O Aways ©) Never (=) Only on clean exit
+ge JC Set ]
+JetPort 5601 Serial Device Server User's Manual
+Web and Telnet Console
+Ze PuTTY Configuration
+Category:
+| E- Session
+|. — Legging
+=| Terminal
+| Keyboard - Bell
+Options controlling SSH connections i
+Data ta send ta the server
+ 
+ 
+Remote command:
+Features
+=) Window
+Appearance - Behaviour Translation Selection -Colours
+J- Connection
+ 
+ 
+Protocol options
+[ |Dont allocate a pseudo+teninal [ |Enable compression
+Preferred 55H protocol version: Oley Oi (02
+Encryption options
+Encryption cipher selection policy: | AES (55H 2 only) | Blowfish 30 ES | - wam below here —
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+| Cancel
+ 
+SSH Console is opened. The default username of the SSH public key is admin, password is admin. You can see the console as below:
+Login as: admin
+admin(2192.168.10.3's password: (admin)
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkxk id Korenix JetPort Commander ST
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+Input System Password: ***** (The password you setup in the Jetport commander.) Password confirmed. Starting Main Menu. You can start to configure your JetPort by SSH console.
+JetPort 5601 Serial Device Server User's Manual 4-11
++ 192.168.10.3 - PulT¥
+ra — m ES | pem ^ TOME i" t System Password:
+faS3word Comt rmed .
+D
+Ln m
+ct ct
+G Lé P Ln Im ct ¢ ct | H HH
+p jı
+ct f Lü at ct ct
+h d :
+Lh m co ef | L H
+j
+r E E "al
+o E a
+n E Oo D Li
+. M wu p^r n
+ct Là
+Hj H Ld
+T LJ Lu LÄ m ct D Pm TD kär
+o [pp ct % D ]' ae
+h
+LE
+DD H t BO
+Ao £u a ct ff et —
+=]
+Fii
+P. t Te
+k
+Lé
+LD
+D H E (e
+Li |
+=]
+La
+H H
+D D LI
+fl dr len WR ep Zz m o wl m Im
+T ; m D O
+H1 rà Et (3 of
+Fe a Fr]
+ 
+Type the Password you setup in the JetPort Commander.
+Configuration
+4-12
+Configure the device and port by pressing function number or the hinted initial.
+12]
+Press “q” to exit the function. Always press "a" to apply and save change after making a configuration.
+JetPort 5601 Serial Device Server User's Manual
+A
+SNMP MIB II and RS232 Like Support
+Jetport 5601 has build-in SNMP agent that supports SNMP trap, RFC 1317 RS232 MIB and HFC1213 MIB-II. The following tables list SNMP variables implemented in Jetport 5601.
+HFC1213 MIB-II supported SNMP variables
+System MIB
+sysORLastChange sySORID sysORDescr sysORUpTime
+Interface MIB
+Howe [rowers — [ome — [mem — |
+Address MIB
+atlflndex atPhysAddress atNetAddress LU
+IP MIB
+ipAdEntBcastAddr ipRouteDest ipRoutelflndex
+ 
+ipRouteMetric1 ipRouteNextHop ipRouteType ipRouteMask ipRoutelnfo ipNetToMedialflndex | ipNetToMediaPhysAddress | ipNetToMediaNetAddress | ipNetToMediaType
+ipRoutingDiscards
+ICMP MIB
+Lemmer
+TCP MIB
+emnes momen [eem [moe | OOO T o e SSS
+UDP MIB
+udplnDatagrams udpNoPorts udplnErrors udpOutDatagrams udpLocalAddress
+SNMP MIB
+RFC1317 RS232 supported SNMP variables RS232 MIB
+ 
+ 
+rs232Number rs232Portlndex rs232PortType rs232PortlnSigNumber | rs232PortOutSigNumber
+A-2 JetPort 5601 Serial Device Server User's Manual
+FAQs
+rs232PortlnSpeed rs232PortOutSpeed rs232PortlnFlowType rs232PortOutFlowType NENNEN rs232AsyncPortlndex rs232AsyncPortBits rs232AsyncPortStopBits rs232AsyncPortParity rs232AsyncPortAutobaud rs232AsyncPortParityErrs | rs232AsyncPortFramingErrs | rs232AsyncPortOverrunErrs le
+rs232InSigPortIndex rs232InSigName rs232InSigState rs232InSigChanges BED rs232OutSigPortlndex rs2320utSigName rs2320utSigState rs2320utSigChanges BED
+ 
+JetPort 5601 Serial Device Server User's Manual A-3
+RS232 Pin Assignment
+Pin No. Name Notes/Description 1 DCD Data Carrier Detect 2 RD Receive Data (RxD, Rx) 3 TD Transmit Data (TxD, Tx) 4 DTR Data Terminal Ready 5 SGND ` Ground 6 DSR Data Set Ready 7 RTS Request To Send 8 CTS Clear To Send 9 RI Ring Indicator RS232 DBS Male
+a) GG @ ® e) D (e @
+C
+Revision History
+Version Description Date
+The first released version. Aug. 2006
+V1.1 Add Din-Rail Mount Mar. 2007
+Installation and notice.
+Correct Serial Port LED color. | Oct. 2008 Remove Linux TTY driver July 2009
+ 

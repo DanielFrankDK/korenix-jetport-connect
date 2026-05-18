@@ -1,0 +1,817 @@
+Korenix JetPort Commander - Windows Utility of JetPort Serial Device Server
+User's Manual
+August 2006 (V1.1)
+korenix
+www.korenix.com
+ 
+Korenix JetPort Commander
+- Windows Utility of JetPort Serial Device Server
+User's Manual
+Copyright Notice
+Copyright © 2006 Korenix Technology Co., Ltd. All rights reserved.
+Reproduction in any form or by any means without permission is prohibited.
+Contents
+Chapter 1 Introduction of JetPort Commander.....sssssssnnnnunnnunnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn 1-1 Chapter 2 MVS Teall AUN OI see 2-1 Install JetPort Commander ....ccoooccncccccccnnccnnccnnonnnconnononcnnnononcnnononcnnnonanennnnnanens 2-1 Chapter 3 Gontigura ON cua 3 SE VErG ONA NN aS 4 o A 4 co tte ane eee ir fern nue rane nme ne net gee eee eee een 4 FN 5 Locate NE DENG se 5
+Dual Power and Redundant Ethernet Display ...............oooccccoocnnccoccncccncnncnacnnnnas 6 A N 6 NED 7 NOUICAUO Ns Tacos 7 Management EE EEE 10 Update FINA W NC surre 10 BO EE NT EE ENN eee ey A 10
+SAVE REV See 11
+Port COMUN cea 12 Serial SEUNGS save 12 Advanced Data Packing OptiONS.........ccccoooccnncccoccnncccncnnnononcnnnononccnnnnnnonnonnnnons 12 Service Mode- Virtual COM ssena aan a a a a 13 Service Mode- TCP Servel.........cccccccccccccccceseceeceeseceeseeeeeeeseeeeesseaeeeeseeaeeesseanes 15 Service Mode- TCP Cl Mii did 17 Servico Mode UD Pt radial 18
+I (STIL 9 QUOI pi 20 Ar AA a a T E A E 22 ATCO NL 22
+senal TUNNE ME Ne 23 E And 24 Group Setup WIZ Maa cea 26 Group Firmware Wizard esporadico 28 PCEN AA AE ee A. aincabcaset lade edentinitaicccneradnies 29
+Moer 30
+1
+Introduction of | etPort Commander
+Jetport series is a smart RS-232 or RS-232/422/485 to Ethernet serial device server. It connects the serial port of devices such as card readers, measurement devices, or data acquisition terminals, over Ethernet just like locally attached. JetPort serial device server eliminates the limitation of single host and transmission distance of traditional serial communications by creating access for multiple hosts in Ethernet. The compact size and various mounting options further create installation flexibility.
+JetPort Commander is an easy-to-use utility with auto device discovery in a LAN or adding devices on the public network. All of the configurations on the serial server can be done in the JetPort Commander. You can also apply configurations of one serial server to the other serial servers.
+This manual describes: E JetPort Commander Installation
+E JetPort Commander Configurations. Server Configuration, Port Configuration, Setup Wizards, IP Collection and Monitor.
+The manually apply to below models:
+NW JetPort 5201 RS-232 to Ethernet Serial Device Server m JetPort 5601 RS-232/422/485 to Redundant Ethernet Serial Device Server
+m dJetPort 5601f RS-232/422/485 to Fiber Ethernet Serial Device Server
+E JetPort 5604 4-Ports RS-232/422/485 to Redundant Ethernet Serial Device Server NW JetPort 5604i 4-port RS-422/485 with Isolation Redundant Serial Device Server
+The Software can be downloaded in the Korenix web site. http://www.korenix.com/support_downloads.htm
+2
+ 
+Installation
+Install JetPort Commander
+1. Insert the CD and auto-run the program. If the setup does not auto-run, select “JetPort 5601(Model Name)”, and "Operation System”, run JetPort Setup.exe to install Windows utility, JetPort Commander.
+Note: The execution file is in the JetPort Model Name folder. Ex: If your product is JetPort 5601, select the JetPort 5601 folder. If your product is JetPort 5604, select the JetPort 5604 folder.
+Ja Installing JetFort Commander
+If you have installed previous version of JetPort Commander, please close it first before continuing.
+Destination Directory
+|C:AProgram Files‘JetPort Commander
+Required: 4583 E, z Available; 3072492 K. Browse. |
+ 
+2. When the installation is finished, there are three options: v Launch JetPort Commander Now: Start configurations. v Visit Korenix registration page: Register products to Korenix.
+v Launch JetPort later: Start configurations later.
+The mrtalabon of Fort Commander is finished
+(jy Launch JetPort Commander Now
+Visit Korenix registration page
+T Launch JetPor later
+ 
+3. Broadcast the JetPort unit: JetPort Commander will broadcast the network and search all available JetPort units in the network. The default IP address of JetPort is “192.168.10.2”.
+Broadcast Searching 57 CA TTT TT
+New Devices M 152 168.16.1 O0:BB:CC:D0-E2:00, Click "checked" to assign a valid IP..
+  
+ 
+MAC 100:12:77:12:23:45 Original IF 192 168102
+hø Using Static IP ë [ Using DHCP Assign Static IP
+Metmask. [255.255.255.0 Gatway [192.168.10.2 DNS | DNS2 [|
+Cancel Clear All Add eG. Auto Scan |
+GT A lot of IPs need to be re-config? Click here C | DK — Your best choice. Network Setup Wizard. ee
+Product Tip: If you have multiple Network Adapters (i.e. wireless and wired), please activate ONLY ONE Network Adapter that can  ; locate the JetPort devices, and CLOSE the rest Network Adapters. | Otherwise, JetPort Commander may broadcast INCORRECTLY. —
+- === == == == == == == == === == == == == == == == == === == == BM B= == == => => => = —
+4. Configuring the JetPort unit: 4.1 Click on the JetPort unit and select “Add” for further configuring the unit.
+4.2 Select “Static IP” if you want to specify the network parameters, or select “DHCP”, or “BootP” if you want dynamic configuration for the JetPort unit.
+5. Configuring the serial port as COM port: 5.1 Go to “Configuration”, and choose the “device” and the “port”. Select "Serial Settings” to configure the serial parameters
+D JetPort Commander
+File Device Configuration
+    
+   
+[ ]alve ML] warming EJ not available
+   
+   
+      
+(4 192.168.10.2 Y port]
+©) Monitor = i Setup Wizard
+22, Virtual COM Wizard aK. Group Setup Wizard
+          
+Service Mode | Notification |
+ax. Group Firmware Wize porii å Serial Tunnel Wizard Fort Aliaz Pat ix. Group IP Wizard
+g IP Collection
+Y System Log Baudrate 460800 r Stop Bits 1
+Parity No En Flow Control Ik Flow
+ 
+Data Bits 8 ae | Interface
+Quick Start
+5.2 Select "Service mode” , "Virtual COM Mode” and press "Map Virtual COM” to map the port to the COM port. Serial Settings Motification |
+por Select a Virtual COM Name
+Service Mode Virtual COM Mode ¥ |
+Virtual COM Mode |
+     
+Virtual COM Settings AY Map Virtual COM
+Multilink |
+Max Connections | 1 ka |
+Destination Host “COM Name
+1 | alting for VOOM connec aa
+E | OK | alting for VOOM connec ance
+Congratulations! You have finished JetPort configurations with Virtual COM mode. You can also use web or telnet console by the JetPort IP address.
+ 
+JetPort Commander User’s Manual 2-2
+Windows Management Tool
+3
+Configuration
+JetPort serial device server provides powerful Windows management tool, JetPort commander for multiple device management.
+This chapter introduces major functions in JetPort Windows Commander m Server Configuration
+Broadcast
+Configuration
+General
+Locate
+Security
+Networking
+Notification
+Management
+Firmware Update
+DI/DO (New feature of 5604/5604i)
+Save / Reload
+Y v VV VV VV Y V VY
+m Port Configuration > Port Serial Settings > Port Service Mode > Port Notification m Setup Wizard Virtual COM Wizard Serial Tunnel Wizard Group IP Wizard Group Setup Wizard
+Y VV WV
+> Group Firmware Wizard m IP Collection @ Monitor
+JetPort Commander User’s Manual
+Windows Management Tool
+Server Configuration
+Server configuration covers all settings for the device. Before you start, you need to add the devices first in the configuration list.
+Broadcast After installing JetPort Commander, you can broadcast for all available devices on the network. Choose “Broadcast” button in the quick bar, and start to search. Select the device you wish to add and click “Add”.
+©) JetFort Commander
+File Device Configuration
+Broadcast Searching
+New Devices M 192.168.10.2, JETPORT5201-DEFAULT, JetPort5201, Alive, Logged in
+Cancel Clear All Add
+< A lot of IPs need to be re-config? Click here = Your best choice. Network Setup Wizard.
+ 
+Configuration In the Configuration menu, you will find the added device in the list. Double click on the device will continue to configure rest of the device settings. The “Refresh” Button will update the latest list of added available devices.
+Cr JetFort Commander
+File Device Configuration
+[  ]alve ML] warning not available
+å
+of poti 1 : 192.168.10.2 : 0å:BB:CC:39:66:00  JETPORTS201-DEFAULT JetPort5201 Alive, Logged in Bi Monitor ee DA E = ix. Setup Wizard 22, Virtual COM Wizard iz, Group Setup Wizard | iz. Group Firmware Wiza : $ Serial Tunnel Wizard x, Group IP Wizard Æ IP Collection e System Log
+   
+JetPort Commander User's Manual 4
+Windows Management Tool
+General
+The General section lists information of “Model” Name, Firmware "Version”, “IP Address”, and "MAG Address”.
+You can modify Device Name and remark Location information.
+Using SNTP Time Server: Enable Time Server by specifying SNTP server IP, Port and Time Zone.
+Auto IP Report: If this device uses DHCP or BootP IP, enable Auto IP Report will report its dynamic IP address to the specified host regularly. You can use "Get Current Host” to assign the IP report to be sent to current host. Specify "Report Interval” as to
+how often the IP address should be sent, zero means no report will be sent.
+After modifying configuration, be sure to validate the changes by using "Apply Only” or "Apply and Save”.
+   
+=| JetPort =| Configuration
+Security | Networking | Notification | Management | Update Firmware | Save/Load
+= 132.1 58.10.2 Model Version 24 port] | | Mk Monitor HK Setup Wizard IP Address MAC Address gy IP Collection y System Log Device Name*Location JETPORT5201 -DEFAULT 8) Locate On | Y Using SNTP Time Server Y Auto IP Report SMTP Server IP Port IP Address Port | pool.nip. org 1 23 | 0
+Time Zone — Get Curent Host | [GMT +08: 00]1 aipei hi
+Report Interval
+0 Seconds
+ 
+| Product Tip: Always save your configurations to validate the changes with 2 options. , Apply Only: Only apply the change one time without saving. When rebooting the device, the ' changes will not exist. | Apply and Save: The change will be applied and saved in Flash. When rebooting the device, the | changes are still valid.
+Locate the Device
+JetPort Commander can identify one device among the others by the IP address with the “Locate On” function in General ent
+ 
+5 JetPort Commander User’s Manual
+Windows Management Tool
+Dual Power and Redundant Ethernet Display
+The 2 new display functions are supported from JetPort Commander V1.5 and later version.
+The Dual Power display function is applied to JetPort 5601 and 5601f. JetPort 5601 series support 2 power inputs, PWR1 is the DC terminal block, PWR2 is the DC power jack.
+The Redundant Ethernet display function is only applied to Jetport 5601. JetPort 5601 has dual Ethernet ports for redundant design. The Redundant Ethernet LED displays the active status.
+Model Version Power
+etParS6 01 | 103 j= =
+IF Address MAC Address Ethernet
+192168 10.103 | 1 2
+Device Name/Location
+JETFORT5601-DEFAULT E Locate On |
+  
+Power Power i” - i , : AM: Power 1 is activated. Power 2 is activated. Power 1 , Both Power 1 and Power 2 are activated. Ethernet Ethernet 7 2 å 1 2 Ethernet port 1 is linked. Ethernet port 2 is linked. Ethernet 1 ¿NM — Ethernet port 1 and port 2 are linked, Port 1 is the master port. Ethernet i
+Ethernet port 1 and port 2 are linked, Port 2 is the master port.
+Note: 5201 doesn't support dual power input and redundant Ethernet, both of the Power and Ethernet display keeps in gray. 5601f supports dual power input but doesn't support redundant Ethernet, the display of Power can active as above description, the display of redundant Ethernet keeps in gray.
+Security JetPort Security includes access list and administration security. Access List
+The Access IP Table specifies the IP address and subnet that can access to the device. The access is based on IP and netmask combination.
+If the access is open to all hosts, do NOT enable this function.
+Administration Security
+You can assign password to protect others from changing the configurations on the device.
+If you assign password, you will need to give password every time when you access
+JetPort Commander User's Manual 6
+Windows Management Tool
+Windows, Web, or Telnet consoles. The password will also validate on Setup Wizard configuration.
+You can input max. 12 characters as password.
+After modifying configuration, be sure to validate the changes by using "Apply Only” or "Apply and Save”.
+General (Gecurity [Networking | Notification | Management | Update Firmware | SaveLoad
+Access IP Table Password
+IPT TA Mask 0000 | | [Enabled IP2 E Mask o.oo | [ Enabled IP3 PO Mask 0000 8 | [ Enabled IP4 PO Mask 0.0.0.0 [- Enabled IPS e Mask 0000 [Enabled IPE ny Mask 0000 M Enabled IP? PO Mask 0000 [Enabled
+       
+                     
+New Password
+sn
+Confirm New Password
+sn
+Old Password
+—
+Change Password
+Networking
+JetPort supports both Static IP or DHCP/BootP IP configuration. After modifying configuration, be sure to validate the changes by using “Apply Only” or “Apply and Save”.
+General | Security (Networking ) Notification | Management | Update Firmware | Save/Load
+Static IP Settings IPAddess 92168102 — Hetmask [255.255.255.0 Galway [192.168.10.3 | DNS 68911 OO DNS2 AA
+Notification
+JetPort supports event notification by SNMP trap, email, or system log.
+SNMP notification
+To activate SNMP notification, check “SNMP Management Enable” from “Management” menu and assign the “community”, “location”, “contact info”, and Trap Server IP.
+7 JetPort Commander User's Manual
+Windows Management Tool
+General | Security | Networking | Notification ftanagement |] pdate Firmware | Save/Load |
+W Web Management Enable Goto Web Management | i Telnet Management Enable Goto Telnet Management |
+ 
+SNMP Management Settings
+Location |
+Contact |
+Trap Server?
+i
+Trap Server3
+i
+Trap Serverd
+Eo
+The length of community is from 1 to 31, which cannot be left blank and do NOT
+include “;” mark. The length of Location and Contact information is from 0 to 255, which is optional.
+The Trap Server supports domain name format, and requires at least one Trap Server information to activate the setting.
+Select SNMP Trap in notification menu. Specify the notification event type first and enable SNMP management in Management menu.
+General | Security | Netwarking[_ Notification } Management | Update Firmware | Save/Load | Wwe SKMP Trap | Email Notification | Syslog Notification
+SAMP Settings
+Notified Items W Hardware Reset [Cold Start] lø IP Changed
+W Software Reset [wam Start] W Password Changed
+W Login Failed W Access IP Blocked
+ 
+Notification Items:
+> Hardware Reset (Cold Start): Rebooting JetPort from power plug will trigger the event
+> Software Reset (Warm Start): Rebooting JetPort from “Reboot Device” function from "Save/Load” menu will trigger the event. Heboot Device
+(8) Reboot Device |
+> Login Failed: Using wrong password in console will trigger the event > IP Changed: Changing network setting will trigger the event
+> Password Changed: Changing the password will trigger the event
+> Access IP Blocked: Report blocked IP addresses
+JetPort Commander User's Manual 8
+Windows Management Tool
+Email Notification Enabling Email notification will open a window for SMTP settings.
+Assign SMTP server, and if Authentication is required for the SMTP server, check the authentication box and specify the users name and password.
+Assign the target receivers’ IP address. JetPort supports sending notification to max. 4 email addresses.
+General | Security | Networking Notification | Management | Update Firmware | Save/Load |
+lw SNMP Trap hø Email Notification | Syslog Notification
+SNMP Settings Email Settings |
+Notified Items hø Hardware Reset [Cold Start] hø IP Changed
+hø Software Reset [wam Start] iw Password Changed
+W Login Failed hø Access IP Blocked
+SMTP Settings SMTP Server
+Uthentication Required
+ 
+Email List Email Address 1
+ew
+Email 4ddress 2
+EEE
+Email 4ddress 3
+ES
+Email 4ddress 4
+ss
+System Log Server Notification Enabling Syslog Notification will open Syslog Settings window.
+Specify Log Server IP and Port, or select "Using Current Host's Log Server” to specify current host as the log server.
+General | Security | Networking  Notfication | Management | Update Firmware | Save/Load |
+Ww SNMP Trap W Email Notification i Suslog Notification
+SNMP Settings | Email Settings Syslog Settings |
+Notified Items We Hardware Reset [Cold Start] W IF Changed
+W Software Reset [wam Start] Ww Password Changed
+W Login Failed G Access IP Blocked
+System Log Settings Server IP Fort
+nm 1 Using Current Host's Log Server
+After modifying configuration, be sure to validate the changes by using “Apply Only” or “Apply and Save”.
+JetPort Commander User's Manual
+Windows Management Tool
+Management
+In addition to JetPort Windows Commander, JetPort can also be managed by Web and Telnet consoles.
+To enable or disable the management consoles, go to “Configuration” and "Management”. JetPort enables Web/HTTPS and Telnet/SSH consoles by default. To disable Web/HTTPS or Telnet/SSH consoles, uncheck the boxes.
+“Go to Web Management’ will open web browser and enter web console of JetPort. JetPort 5201 supports web access without security, JetPort 5601 only support HTTPS.
+“Go to Telnet Management” will open Telnet session and enter telnet console of JetPort 5201. Or it will ask you to open the SSH client to access JetPort 5601.
+General | Security | Networking | Notification Management | Update Firmware | Save/Load |
+iw Web Management Enable Goto Web Management | W Telnet Management Enable Goto Telnet Management |
+Choose “Apply Only” or “Apply and Save” to validate the changes.
+Update Firmware
+You can find up-to-date firmware of JetPort in Korenix website download section. http:/Awww.korenix.com/support_downloads.htm
+ 
+To update Firmware of the device, save the firmware file in your host PC. Go to “Configuration”, and “Update Firmware”. Specify the file location by Browsing and continue operation by Update.
+General | Security | Networking | Notification | Management| Update Firmware), Save/Load |
+Firmware Image
+| Browsing | Update |
+The device will reboot after firmware update and be located again in Commander device list.
+Note: All configurations will restore to default except for the device IP address after the firmware update.
+DI/DO
+Digital Input (DI) and Digital Output (DO) are the new feature implemented in 5604 and 5604i. The JetPort Commander V1.8 starts to support this feature.
+=- JetPort General | Security | Networking | Notification | Management | Update Firmware DIDO | Save/Load =| Configuration A- 192.168.10,2 DI DO GF por Di D2 Dl_3 DI_4 DOT DO ? 4 porta a å O E Pe 1 | Y porta 4 potd
+JetPort Commander User's Manual 10
+Windows Management Tool
+DI: You can read the status of the DI. O means logic Low. 1 means logic High. When connect DI with DO of other terminal device, the DI can display the DO status of the
+terminal device.
+DO: You can read and set the status of the DO. 0 means logic Low, 1 means logic High. Click the 0/1 button, you can change its value to 1 or 0.
+po 1 Means logic High for DO 1. DO 1 means logic Low for DO 1.
+DE a
+Note: The feature introduction is introduced in the 5604/5604i manual.
+Save / Reload
+11
+After configuration is finished, be sure to Apply and Save the changes.
+se Apply and Save Apply all configurations and Save to Flash. The changes are valid after reboot. | I Load default configuration except Network Settings. I Reboot the device. Imp | Retrieve saved configuration file to apply in the device.
+erat | Save the current configuration into a file and save the file in current host.
+ 
+JetPort Commander User's Manual
+Windows Management Tool
+Port Configuration
+Serial Port Configurations include configuration for the serial parameters, serial communication modes, data packing options, and event notifications.
+Go to the port of the device in Configuration tree.
+ 
+=| JetPort Serial Settings | Service Mode | Notification | =| Configuration =| 192.168.10.5
+¥ N Pais Fi
+port]
+SS Monitor . 4%, Setup Wizard Baudrate [35400 y] StopBits fi +] Performance [Throughput = ’ - y K, Virtual COM ‘wizard Parity = Flow Control [No Flew — y] 22 Group Setup Wizard . Me No Flow Group Firmware Wiza | Data Bits 8 * | Interface | |
+x Serial Tunnel Wizard
+Choose “Apply Only” or “Apply and Save” to validate the changes.
+Serial Settings
+The available serial settings for JetPort is as follows:
+Port Alias: Remark the port to hint the connected device. Baudrate: from 110bps to 460.8kbps Parity: No, Even, Odd, Mark, Space Data Bits: 5, 6, 7, 8 Stop Bits: 1, 2 (1.5) * 1.5 is only active when data bit is 5. Flow Control: No, XON/XOFF, RTS/CTS, DTR/DSR Interface: RS232 / RS422 / RS485(4 wire) / RS485 (2 wire) Performance: Throughput, Latency Throughput mode guarantees highest transmission speed Latency mode guarantees shortest response time
+Advanced Data Packing Options
+For advanced data packing options, you can specify delimiters for Serial to Ethernet and / or Ethernet to Serial communications.
+You can define max. 4 delimiters (00+FF, HEX) for each way. The data will be hold until the delimiters are received or the optional “Flush Ethernet to Serial data buffer” times out. Zero means disable(factory default).
+Delimiter Setting:
+Serial to Ethernet Ethernet to Serial |
+Delimiter 1 Delimiter 2 Delimiter 3 Delimiter 4 | [HE] | [HE] | [HE] | [HE] [| Enabled [| Enabled | Enabled |) Enabled
+Flush Ethernet to Serial Data Buffer After [O ME
+The received data will be queueing in the buffer until all the delimiters are matched. When the buffer is full [4K. Bytes] or after “flush E25 data buffer" timeout. the data will also be sent.
+Force TX interval time is to specify the timeout when no data has been transmitted. When the timeout is reached or TX buffer is full (4K Bytes), the queued data will be
+JetPort Commander User's Manual 12
+Windows Management Tool
+sent. Zero means disable(factory default). Force T interval time
+F me Hta1 (interval time data 2 [intervaltime] data 3-
+Choose “Apply Only” or “Apply and Save” to validate the changes.
+Service Mode- Virtual COM
+Virtual COM service mode enables the serial port in JetPort as PC's locally-attached COM port for Windows or tty port for Linux. One PC can have as many as COM ports on the network without the limitation of PC's physical slots. The Virtual COM ports on the network can also be shared by multiple hosts.
+       
+  
+ 
+themet M5 å JER å Windows COM driver == POS terminal Digital display
+Medical measurement
+For redundant system considerations, JetPort also supports up to 5 Virtual COM links. Apply same serial setting to the backup host, all the links will transfer data simultaneously.
+             
+I Bætkup 2
+COM 5
+Ethiern#
+Es Max 5 multi-link
+| Senal
+o Data Acouisition
+To start the Virtual COM, select Virtual COM Mode in Service Mode of Port Configuration.
+=- JetPort Serial Settings Service Mode | Notification | =| Configuration —port1-
+=- ye 0.5 Service blode Virtual COM Mode + | ae port | |
+In 5604, please select the serial ports you want to configure first. Port 1 is the serial 1, port 2 is the serial 2, port 3 is the serial 3, port 4 is the serial 4.
+Select “Map Virtual COM” to map the port to PC’s COM port.
+13 JetPort Commander User’s Manual
+Windows Management Tool
+AY Map Virtual COM
+A Window will appear to confirm to change to Virtual COM mode. Choose Apply Only or Apply and Save.
+The Settings has been changed,
+Apply to target? Or discard?
+i + Apple Only ee Apply and Save
+Select the available port number to map to.
+ 
+Serial Settings Semice Mode | Notification |
+part] Select a Virtual COM Name
+Service Mode Virtual COM Mode ¥ |
+virtual COM Mode |
+Virtual COM Settings
+AY MapvitualCOM | Multilink | SS
+Max Connections | 1 ka |
+Destination Host “COM Name
+1 | alting for VOOM connec va
+i C | OF. | alting for COM connec ance
+When the configuration is finished and saved, the COM port number will be shown after port, and you can monitor the port in Monitor menu.
+1@ a m Monitor e Select Monitor Items | = OFTIQUEAaNOr
+ 
+ 
+ 
+ 
+        
+1 i COM] 36400, NO,8,1 JETPORTS201-DEFSULT 192.168.10.2  001277122345 connected
+F COM] + Å Setup Wizard
+i IF Collection
+iy System Log
+Multiple Virtual COM Connections
+Max. one connection is default. To create multiple Virtual COM connection, select max. connection number that the JetPort device is allowed. After increasing the max. connection number, other hosts on the same subnet as JetPort can use the port as Virtual COM port at the same time.
+Note that all the hosts for the multiple Virtual COM connections must have the same serial parameters, i.e. baud rate, start bit, data bit, etc.
+JetPort Commander User’s Manual 14
+Windows Management Tool
+Serial Settings Service Mode | Notification |
+part]
+Service Mode Virtual COM Mode ¥ |
+Virtual COM Mode |
+Virtual COM Settings Misc. Ay | Idle Timeout E [0-655535] Seconds Alive Check 0 [0-65535] Seconds
+Multilink |
+Max Connection:
+“COM Name
+Com: | <= GotovCom| ¿Af Unmap com aca] ae |] rca] øp Uren vn | | Aca] A Uren Con l | | Arca] øp uenee
+ 
+Miscellaneous Settings:
+Idle Timeout: When serial port stops data transmission for a defined period of time (Idle Timeout), the connection will be closed and the port will be freed and re-try for connection with other hosts. Zero is disable this setting (default). If Multilink is configured, only the first host connection is effective for this setting.
+Alive Check: The JetPort device will send TCP alive check package in each defined time interval (Alive Check) to remote host to test the TCP connection. If the TCP connection is not alive, the connection will be closed and the port will be freed for other hosts. Zero is to disable this setting (default).
+To un-map the COM port, specify the port and select Unmap in the quick bar.
+xÁ
+ 
+~ii- Unmap COM
+Service Mode- TCP Server
+15
+When JetPort is configured as TCP Server, it gives the connected serial device a unique IP:Port address on a TCP/IP network that can be accessed by other network hosts. JetPort as TCP Server waits passively to be contacted by the host computer, allowing the host computer to establish a connection and get data from the serial device.
+TCP Server mode supports up to 5 simultaneous connections, so that max. 5 network hosts as TCP Clients can connect to the device at the same time.
+Note that all the hosts for the multiple TCP Server connections must have the same serial parameters to communicate with JetPort, i.e. baud rate, start bit, data bit, etc.
+JetPort Commander User’s Manual
+Windows Management Tool
+   
+Ethernet
+GM Jetron- TOP server
+Serial
+ 
+        
+— R513232 console
+— —
+TCP Server proceeds as follows:
+1. Network host requests a TCP connection with JetPort in TCP Server Mode by IP address and port number.
+2. Once the connection is established, data can be transmitted in both directions from the host to the JetPort device, and vice versa.
+To configure TCP Server, select TCP Server Mode in Service Mode of Port Configuration.
+“Auto Scan” the TCP Data Port number that is available from current host. The Control Port is Data Port number plus one.
+Define the max. connection allowed from 1 to 5.
+Apply and Save the changes. Be Bol and Save |
+K) Refresh function refreshes the current connections.
+Serial Settings Service Mode | Notification
+port]
+Service Mode TCP Server Mode
+ 
+TCP Server Mode |
+-TCF Server Settings Misc. | Data Part |4000 Idle Timeout E (0-655395) Seconds Control Port 4001 | Alive Check E (0-65535] Seconds Multilink |
+Max Connections 1 "| iE) Refresh |
+Destination Host
+| iT COO OO å | sen pene]
+ 
+JetPort Commander User's Manual 16
+Windows Management Tool
+Miscellaneous Settings:
+Idle Timeout: When serial port stops data transmission for a defined period of time (Idle Timeout), the connection will be closed and the port will be freed for other hosts. Zero is disable this setting (default). If Multilink is configured, only the first host connection is effective for this setting.
+Alive Check: The JetPort device will send TCP alive check package in each defined time interval (Alive Check) to remote host to test the TCP connection. If the TCP connection is not alive, the connection will be closed and the port will be freed for other hosts. Zero is disable this setting (default).
+Service Mode- TCP Client
+17
+When JetPort is configured as TCP Client, it will build TCP connection to remote host when data is received. When the connection is built, the data is transmitted bi-directionally. When the data transmission is finished, the TCP connection will be closed by TCP Client. The connect-on-demand TCP Client operation helps the host computer to manage high number of remote devices that exceeds the maximum simultaneous TCP connections allowed. JetPort supports up to 5 simultaneous TCP Client connections for redundant system considerations.
+     
+Ethernet
+ 
+es JetPort TCP Client
+serial
+Bs j HN / Access card reader
+| ml r
+TCP Client proceeds as follows:
+1. The JetPort configured as TCP Client Mode requests a connection to the host. 2. Once the connection is established, data can be transmitted in both directions from the host to the JetPort, and vice versa.
+To configure TCP Client, select TCP Client Mode in Service Mode of Port Configuration.
+Specify the IP and port number of the host. If the TCP Client should connect to the current host, “Auto Scan” will scan current host IP address and available port number. If the TCP Client should connect to other hosts, specify the IP address of the host and "Auto Scan” will scan the available port number of JetPort.
+If the TCP Client should connect to more than one host, specify the IP addresses and port number or use "Auto Scan” to scan the port number of JetPort.
+Apply and Save the changes. se App and Save |
+JetPort Commander User's Manual
+Windows Management Tool
+Serial Settings Service Mode | Notification |
+port] Service Mode TCP Client Mode Y
+"Wee Haase
+ 
+TCP Client Settings Misc. Destination Host Fort Idle Timeout 0 [0-65535] Seconds [182.168:10.100 |4024 ER to Seanf| | Alive Check [g (0465535) Seconds Connect or [Startup = | Multilink | Destination Host Port
+1
+| | e Auto Scan | 2
+| | el Auto Scan | 3
+| | el Auto Scan | 4
+| | el Auto Scan |
+ 
+Miscellaneous Settings:
+Idle Timeout: When serial port stops data transmission for a defined period of time (Idle Timeout), the connection will be closed and the port will be freed and re-try for connection with other hosts. Zero is disable this setting (default). If Multilink is configured, only the first host connection is effective for this setting.
+Alive Check: device will send TCP alive check package in each defined time interval (Alive Check) to remote host to test the TCP connection. If the TCP connection is not alive, the connection will be closed and the port will be freed for other hosts. Zero is disable this setting (default).
+Connect on Startup: The TCP Client will build TCP connection once the connected serial device is startup.
+Connect on Any Character: The TCP Client will build TCP connection once the connected serial device starts to send data.
+Service Mode- UDP
+The UDP Server/Client Mode of operation is designed for applications that require speedy but no-guaranteed data transmission over UDP protocol layer. When JetPort is configured as UDP Server/Client, your serial device can deliver data to multiple destinations at almost the same time since the UDP does not request building connection first before sending data.
+JetPort Commander User’s Manual 18
+19
+Windows Management Tool
+ 
+ES eror UDP
+Serial
+Message Display
+To configure UDP, select UDP Mode in Service Mode of Port Configuration. "Auto Scan” the Listening port number of JetPort.
+If there are more than one destination hosts, specify the IP address range by Destination Host IP Begin and End. "Auto Scan” the sending port number of the device.
+For example: Destination Host Begin = 192.168.10.1 Destination Host End = 192.168.10.100 Send Port = 4040 Listening Port = 4032
+*JetPort will receive Ethernet data from port 4032 and send to serial port *JetPort will receive Serial data to 192.168.10.1 to 192.168.10.100 via port 4040
+Apply and Save the changes. i Aol and Save |
+JetPort Commander User's Manual
+Windows Management Tool
+Serial Settings Service Mode | Motification |
+por
+ 
+Service Mode UDP Mode ¥ | UDF Mode
+UDP Settings
+Listening Part
+4032 eG. Auto Scan | Multilink |
+Destination Host Begin Destination Host End Sending Port 1 192.168.10.1 fg 1192.168.10.100 14040 A oson |
+2
+| to | | eA Auto Scan | 3
+| to | | et, Auto Scan | 4
+| to | | PQ Auto Scan |
+ 
+Notification
+Port status can be notified to administrator by means of Email, SNMP trap, or System Log.
+The events for notification include:
+> DCD changed: When DCD (Data Carrier Detect) signal changes, indicating the modem connection status has changed, the event will be triggered.
+> Rl changed: When RI (Ring Indicator) signal changes, indicating the incoming of a call, the event will be triggered.
+> DSR changed: When DSR (Data Set Ready) signal changes, indicating that the data communication equipment is powered off, the event will be triggered.
+> CTS changed: When CTS (Clear To Send) signal changes, indicating that the transmission between computer and DCE can proceed.
+> Port connected: In TCP Server Mode, when the device accepts an incoming TCP connection, this event will be trigger. In TCP Client Mode, when the device has connected to the remote host, this event will be trigger. In Virtual COM Mode, when Virtual COM is ready to use, this event will be trigger.
+> — Port disconnected: In TCP Server/Client Mode, when the device lost the TCP link, this event will be trigger. In Virtual COM Mode, When Virtual COM is not available, this event will be trigger.
+To enable activate the notification, specify the event type and the notification methods.
+The details of SNMP trap Server, Email SMTP server, or Log server IP should be
+JetPort Commander User’s Manual 20
+Windows Management Tool
+configured first properly in device “Configuration” “Management”.
+General | Security | Networking | Notification. Managemen | Update Firmware | Save/Load |
+e Web Management Enable
+W Telnet Management Enable
+SAMP Management Settings
+Community | Location |
+Contact |
+Trap Server]
+i
+Trap Server?
+i
+Trap Servers
+_
+Trap Serverd
+E
+ 
+General | Security | Networking Notification | Management | Update Firmware | Save/Load
+Wwe SNMF Trap W Email Notification | Syslog Notification
+SNMP Settings Email Settings |
+Notified Items
+W Hardware Reset [Cold Start] lø IP Changed Ww Software Reset [warm Start] W Password Changed W Login Failed W Access IP Blocked
+TP Settings SMTP Server Part User Name Password
+E da EE IE
+hø Authentication Required
+E mail List Email Address 1 Email Address 5
+[AS
+Email Address 2 Email Address 6
+|
+Email 4ddress 3 Email Addres: 7
+|
+Email Address 4 Email Address E
+E IS
+ 
+JetPort Commander User’s Manual
+Windows Management Tool
+General | Security | Networking  Notfication | Management | Update Firmware | Save/Load |
+Ww SNMP Trap hø Email Notification W Syslog Notification
+SNMP Settings | Email Settings Syslog Settings | Notified Items hø Hardware Reset [Cold Start] W IF Changed
+W Software Reset [wam Start] iw Password Changed
+hø Login Failed Ca Access IP Blocked
+System Log Settings Server IP Port
+nm 0 Using Current Host's Log Server
+ 
+After modifying configuration, be sure to validate the changes by using “Apply Only” or “Apply and Save”.
+an Apply and Save |
+Setup Wizard
+JetPort Commander offers 5 Setup Wizards to help you manage JetPort devices as a group and streamline the management tasks.
+iD lero å Conbpurator | -i 12 160.105 i = Jo TO ~{ Welcome to Wizard Center A pnl rey Honiton Nr Please select a wizard you need = bh Ban, Vibe LUN "oy see Å Gio See Weed Di Group Fer Velsand Ki Sena Tunnel Waard | Virtual COM Wizard | D Group Ped lg IP Collection Group Setup Wizard | y Sytten Los : Group Firmae Wr an | Sere) Tunnel Wierd | Group IP Wizard |
+Virtual COM Wizard
+JetPort Commander offers one of the easiest way to add serial COM ports over the
+network by the Virtual COM Wizard. JetPort COM port driver is installed when you install JetPort Commander.
+Select the Virtual COM Wizard from Setup Wizard. There are only 3 steps to follow up.
+JetPort Commander User’s Manual 22
+Windows Management Tool
+Å Jetfot Sa, Criada + 150 15105 $ pen
+ll NA 4 DE de, Sehe Wiad = | Welcome to Virtual COM Wizard NT
+e Diap Fiaa Wat $ Genial Tunnel Wizard
+Li Group iF Wwheerd This wizard vill bring y A rn : ETT år Virtual PGS Å IP Collection This wizard will bring you to setup the device serial porite) and map it to Virtual COM glep Y System Log
+   
+ 
+ 
+ 
+br step.
+STEP |. Select rail poria) from available device. STEP 2. Setup These Serial portii), bawdrate, data bie. 21.
+STEF A, Dane,
+Select the available ports of JetPort devices on the network.
+Select Serial Port[s] | Selected Seral Ports
+Avallable Serial Ports * 192 168. 10.5.port1 JETPORT 5201 -DEFAULT "J 192. 168. 10.6 por JETPORTS201-DEFAULT
+ 
+Continue by configuring the serial settings of the serial ports. In Performance mode, there are “Throughput” mode and “Latency” mode. In Throughput mode, the
+throughput is high. In Latency mode, the response time is fast.
+Serial Port Settings |
+| 1 = | Performance | Throughtput = |
+ 
+Baudrate Stop Bits Parity Ho = Flow Control (ka Flow = Data Bits la = | Interface [R5232 = |
+Specify the Virtual COM port range and continue the operation by checking the COM
+port table.
+virtual COM Settings |
+Virtual COM Range
+From rok å
+Virtual COM Mapping |
+ 
+Virtual COM Mapping T able
+ 
+COM] <=> 192.166.10.5,port1 JETPORT S201 -DEFAULT COM? <=} 192.168. 10.6,por1 JETPORT S201 -DEFAULT
+Serial Tunnel Wizard The Serial Tunnel Wizard gives you the option to transparently pair two devices over
+the network.
+23 JetPort Commander User’s Manual
+Windows Management Tool
+OG Jeo Cot | = å Corpor - m 196 104 105
+7 peal
+G 155165 106
+Y pot sT | a erin Kl | Welcome to Serial Tunnel Wizard År, Setup Weed
+dx Viral COM Wired Nr
+De Gp Gaup Wid Ct Gp Fer Wise
+   
+Sent Tur Aira y = : - - Peral tunnel] izard helpe sau o couple two serial devices do direcly communicate by
+A = Colación SN Eikema Wills Ibe FC Y Sten Log STEF |. Select tives devices thal should be funneled rrethit STEP 2. Select serial parameters Sch åt band råe, data bits, STEF 3. Finish Select the devices that should be paired and move the devices into IP1 and IP2.
+Select Tunnel Pairz |
+ple burde Tunnel Device Pair 4;
+=| e hn. A «| Fort] mn Port? PP
+ 
+t| 192168. 10.6,pot1 JETPFORT5201- Mat 192. 168. 10.5. port] JETPORTS20|-!
+ 
+After configuring the serial setting of the ports, the serial tunnel will be built by assigning one port as the TCP Server mode and the other as the TCP Client mode.
+Done |
+Tunnel Device Pair å
+PaA IP? (192.168.10.6 IP? [192.168.10.5 SÅ NE —
+Port) [porti Port? | port)
+(
+ 
+Thank you for using Serial Tunnel Wizard,
+The right hand side device pair(s) are setup to “tunnel mode",
+Group IP Wizard
+When you have more than one device to configure, it is handful to use Group IP wizard to configure all IP addresses of the devices remotely.
+Select Group IP Wizard after opening JetPort Commander, or use Broadcast and find more than one devices on the network and click Group IP Wizard hint at the bottom.
+JetPort Commander User’s Manual 24
+Windows Management Tool
+Broadcast Searching
+New Devices
+ 
+O 192 168. 10. 2_04:BB:CC:99:66:00, oe 'checked" to assign a valid iP.
+Cancel Clear All Select All
+< A lot of IPs need to be re-config? Click here
+Your best choice. Group IP Wizard.
+ra! Puree | Pibesd
+da. +
+= ilden Berd oy ange årer
+da ia CIA |
+Å. re roret pr Welcome to Group IP Wizard om
+a CF Wend bees PA coria Gee IF rer
+DÅ proa dd ee device. Th jayson aowi 2 the comtiguiancs |
+in i not le ee ce. ETEF L Lociós (he sær derved br Boece ar la DP map
+STEP Ceci ds I ap ot DCF O
+TEE 2. Dat
+ 
+Search the devices in local network (i.e. same subnet), or search by an IP range. Select the devices.
+Select a Network Group |
+Metwork Group
+   
+f Local Network [Broadcast Search] Search and set the nearby delvces [In the same subnet). |
+€ Global Network [Search by IF]
+Search and set the device by an IP range. |
+JetPort Commander User's Manual
+Windows Management Tool
+Select Device(s]
+Available Specified Model Device(s] Selected Device[s]
+192.168.10.2 00:80:33:67:43:00, Click "checked" 192.168.10.2 08:BB:CC:99:66:00, Click "checked!
+     
+> +| Clearal | Selectan | Clearal | Select ail | Select the devices for group IP configuration and define the IP addresses range or by
+DHCP.
+Network, Settings |
+Ww Using Static IP | Using DHCP
+Assign Static IP Range
+P From 192.168.10.5
+IP To [192.168.1010 Done |
+       
+Thank you for using Network Setup Wizard,
+    
+SÍ click "Next" to use this wizard again. Gatway | == pst po Nr DNS? |
+   
+.168.10.2 00:B0:33:67:43:00, Changed to 192.168.10.5 192.168.10.2 OA:BB:CC:99:66:00, Changed to 192.168.10.6
+et Auto Scan |
+Click next to confirm the setup and the IP configuration is finished, you will see the IP addresses for the devices.
+Click "Next" to add these device ==
+Group Setup Wizard Group Setup Wizard helps you to copy the configuration of one device to other devices.
+You can select the items to be copied or not. Go to "Setup Wizard”, "Group Setup Wizard”, and choose “Next” to continue.
+JetPort Commander User's Manual 26
+Windows Management Tool
+| rem | Samira | ur | | Tinsi | Fizaed | Birri
+å Welcome to Group Setup Wizard
+He EE i Tot i eae 18 == - Tr a ad = imp P Wuri
+A, Fra
+A ie Log
+= = mee, Us i g. a - i a 7 å = a pr . Ep e ap Setup Vand helps pea io cope one dende sting do the ole same modela === I a ul Lala á j 2 LLI L. E Mp eee 5 xil TTET 2. Select ir ære deve and the derzañon device
+STEP A. Dalec the device and pt settings do copr
+STEP å. Smi opre
+ 
+Select device model name.
+Select Device Model |
+Select å Device Model
+52107 ”
+ 
+ 
+IF this ligtbos is empty, that means there is no device located. Please search and add the devices again.
+ 
+Select the source device for the configuration and destination devices.
+ 
+Select Device(s] |
+Available Specified Model Device(s] v| 192.168.10.6JetPort5201 JETPORTS201-DEFAUL sp Selected One Source Device
+M4 192.168.10.5,JetPort5201,JETPORT5201-DEFAUL + | de
+Selected Destination Device(s]
+      
+>|
+Specify the configuration items from the source device to the destination devices. Select Group Settings |
+Select group settings
+Device Settings
+ 
+    
+[C Device Name/Location (| SNTP Service
+Auto IF Report _ Access IP Table | Password [| Emai SNMP Syslog Notifications _ web Tehet SNMP Managements
+Port Settings
+ 
+|] Serail Settings
+| I Delimiter Settings
+| ForceTA Settings Operation Settings
+| Notifications Settings
+Click next to confirm and finish the wizard.
+27 JetPort Commander User's Manual
+Windows Management Tool
+Groups Updating
+Group Updating Time will be 14 Seconds [worst case] | i Press Next to start group setup. \ / å
+==
+ 
+Done | Thank you for using Group Setup Wizard, ITA click "Next" to use this wizard again . S
+(
+E 168.10.6, Set OK
+Group Firmware Wizard
+To update firmware for a group of devices can be as easy as 4 steps of Group Firmware Wizard.
+Welcome to Group Firmware Wizard he
+This wizard helps you to update firmware for å group of devices. STEP 1. Select the device model. STEP 2. Select the target devices, STEP 3. Select the new firmware.
+STEP 4, Go.
+Select the device model name and select available devices on the network for the upgrade.
+Select Device Model |
+Select a Device Model HetPortS201
+  
+IF this ligtbos i empty. that means there is no device located. Please search and add the devices again.
+Select Device(s] |
+Available Specified Model Device(s]
+v| 192.168.10.5,JetPort5201,JETPORT5201-DEFAUL M4 192.168.10.6,JetPort5201,JETPORTS201-DEFAUL
+Selected Device(s]
+     
+Specify the firmware image and select next. Confirm the firmware upgrade and
+continue operation. JetPort Commander will upgrade firmware of the devices and reboot again to finish.
+Select Firmware Image |
+Firmware Image
+| Browsing |
+JetPort Commander User's Manual 28
+Windows Management Tool
+Updating
+Updating Firmware Time will be 300 Seconds (worst case] [Y Reboot After Updated
+This is the last step of this wizard, press "Next" to start update firmware. \ / å
+MERCER
+Tørk 1 |- i P
+£
+TIET updated Co, PD 168 108 pedal Le
+ 
+ 
+ 
+= Verk had" So spor Ta la TT
+ 
+IP Collection
+For the dynamic DHCP IP settings, it is often a task to find the changing IP addresses.
+JetPort Commander supports auto IP report function to report the current IP address of the JetPort units to administrator. To enable the function, check “Auto IP Report” in
+“Configuration”, “General”. Specify the host that the device should report IP to, or define current host as the report host.
+Be sure to define the Report Interval time. Zero is disable.
+General | Security | Metworking | Motification | Management | Update Firmware | Save/Load |
+Model Serial Number Version IF Address MAC Address
+(EG | ee Å
+Device Name/Location JETPORTS201 -DEFAULT 80) Locate On
+W Using SNTP Time Server W Auto IP Report
+SMTP Server IP Fart IF Address Fart
+|pool.nip.org 1 23 1 32.168.10.100 ‘60001
+— Get Current Host [GMT +08: 00)T aipe! bd
+Report Interval
+j5 Seconds
+ 
+Go to the IP Collection function of the main menu and find the devices auto IP report list.
+29 JetPort Commander User's Manual
+Windows Management Tool
+0) Fefor Commander | File Devika Cordigrbhen
+          
+Geral =| GA Conbguator + di 12 168.105 - gg 2 GTA F paii h Mordor = hi Sena wizard Le Virtual COM Wired E Group Setup Wied E Grp Erre Wesed lí Señal Ture wired Gr lP Wiwa AI
+Y Syin Log
+  
+Jk TRUR TAT EG FALIL T Jer AN Mon Fabs 5 17 5044 2006 — Jk TRUR TAN EG FALIL T Jet oa Min Feb ll 14 55 A
+                                                 
+Monitor
+You can monitor the COM port status from the Monitor function. The monitored items can also be defined by the “Select Monitor Items”. You must configure the COM ports first before monitoring the status.
+©) JetFort Commander
+File Device Configuration COM Contisurston Help
+KEk)
+      
+   
+     
+Monitor ra Cea Manio ind SØ Configuration EG 192168105 VEDM IP Address Eden y port (COM) 1 COM 460800 5 NO JETPORTSA 192.168.10.5 D0:B0:33:6% connected må 132.168.10.6 2 COM? 460800 8 NO JETPORTS2A 192.168.10.6 08:B6:CC:99 connected Ea Sf port (COM? å E Monitor m -y COM ae 3 COM2 valable Monitos [ham Selected Monitor terme
+E: An setup Wizard E Be Virtual COM Wizard bee li, Group Setup Wizard fave lie Group Firmware Wizard jue = Serial Tunnel Wizard Ede i Group IP Wizard rar - IP Collection Bese Å | System Log
+Fu eo ee
+ 
+JetPort Commander User’s Manual 30
+Windows Management Tool
+Revision History
+31
+Edition V1.0 V1.1
+Date Modifications Aug. 9, 2006 The first version. Feb. 16,2007 Add DI/DO configuration method.
+JetPort Commander User’s Manual
