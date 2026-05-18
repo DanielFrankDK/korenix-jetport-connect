@@ -111,65 +111,92 @@ class LinkParser(HTMLParser):
 
 # ── Device connection ─────────────────────────────────────────────────────────
 
-# Hints used to match discovered hrefs/link-text to config sections
+# Hints used to match discovered hrefs/link-text to config sections.
+# The JetPort 5601 web UI tabs are named: General, Security, Networking,
+# Notification, Firmware, Save/Load — and Port Serial Settings / Service Mode.
 SECTION_HINTS = {
-    "basic":   ["basic","general","server_basic","devname","sysname","setting","config","system"],
-    "network": ["network","netconfig","ip_config","ipaddr","ethernet","lan"],
-    "port":    ["port","serial","com","uart","portconf","baud"],
-    "service": ["service","mode","vcom","virtual","tcpserver","tcp","udp","operation"],
-    "acl":     ["acl","access","filter","security","ipfilter","firewall"],
-    "notify":  ["notify","notification","event","alert","snmp","email","syslog","trap"],
-    "save":    ["save","restart","reboot","factory","default","firmware","upgrade","restore"],
+    "basic":   ["general","basic","setting","config","system","server_basic","sysname","devname","overview"],
+    "network": ["networking","network","netconfig","ip_config","ipaddr","ethernet","lan"],
+    "port":    ["serial","port","serial_setting","serialsetting","com","uart","portconf","baud"],
+    "service": ["service","mode","servicemode","vcom","virtual","tcpserver","tcp","udp","operation"],
+    "acl":     ["security","acl","access","filter","ipfilter","firewall"],
+    "notify":  ["notification","notify","event","alert","snmp","email","syslog","trap"],
+    "save":    ["save","saveload","reload","restart","reboot","factory","default","firmware","upgrade","restore"],
 }
 
-# Tried in order when link discovery does not find a section.
-# Covers .htm, .asp, .html, /cgi-bin/ and bare-path variants seen in Korenix firmware.
+# Fallback URL candidates tried in order when auto-discovery finds nothing.
+# Ordered so the names the JetPort 5601 manual actually uses come first.
 FALLBACK_URLS: dict[str, list[str]] = {
     "basic": [
-        "/server_basic.asp","/server_basic.htm","/basic_setting.asp","/basic_setting.htm",
-        "/basic.asp","/basic.htm","/general.asp","/general.htm","/server.asp","/server.htm",
+        # Exact tab name from manual: "General"
+        "/General.asp","/general.asp","/General.htm","/general.htm",
+        # Overview page has a "Basic Setting" link
+        "/Basic_Setting.asp","/basic_setting.asp","/Basic_Setting.htm","/basic_setting.htm",
+        # Other common guesses
+        "/server_basic.asp","/server_basic.htm",
+        "/basic.asp","/basic.htm","/server.asp","/server.htm",
         "/system.asp","/system.htm","/config.asp","/config.htm",
-        "/cgi-bin/basic.cgi","/cgi-bin/server.cgi",
+        "/overview.asp","/overview.htm",
+        "/cgi-bin/general.cgi","/cgi-bin/basic.cgi","/cgi-bin/server.cgi",
     ],
     "network": [
-        "/server_network.asp","/server_network.htm","/network_setting.asp","/network_setting.htm",
-        "/network.asp","/network.htm","/ip.asp","/ip.htm","/ip_config.asp","/ip_config.htm",
-        "/netconfig.asp","/netconfig.htm","/ethernet.asp","/ethernet.htm",
-        "/cgi-bin/network.cgi","/cgi-bin/ip.cgi",
+        # Exact tab name from manual: "Networking"
+        "/Networking.asp","/networking.asp","/Networking.htm","/networking.htm",
+        # Overview page has a "Network Setting" link
+        "/Network_Setting.asp","/network_setting.asp","/Network_Setting.htm","/network_setting.htm",
+        # Other common guesses
+        "/server_network.asp","/server_network.htm",
+        "/network.asp","/network.htm","/ip.asp","/ip.htm",
+        "/ip_config.asp","/ip_config.htm","/netconfig.asp","/netconfig.htm",
+        "/ethernet.asp","/ethernet.htm",
+        "/cgi-bin/networking.cgi","/cgi-bin/network.cgi","/cgi-bin/ip.cgi",
     ],
     "port": [
-        "/port1.asp","/port1.htm","/port_serial.asp","/port_serial.htm",
+        # Exact tab name from manual: "Serial Settings" / "Port Serial Settings"
+        "/Serial_Settings.asp","/serial_settings.asp","/Serial_Settings.htm","/serial_settings.htm",
+        "/Port_Serial.asp","/port_serial.asp","/Port_Serial.htm","/port_serial.htm",
         "/serial.asp","/serial.htm","/port.asp","/port.htm",
+        "/port1.asp","/port1.htm",
         "/serial_setting.asp","/serial_setting.htm",
         "/com1.asp","/com1.htm","/uart.asp","/uart.htm",
-        "/cgi-bin/port.cgi","/cgi-bin/serial.cgi",
+        "/cgi-bin/serial.cgi","/cgi-bin/port.cgi",
     ],
     "service": [
-        "/port_service.asp","/port_service.htm","/service.asp","/service.htm",
-        "/mode.asp","/mode.htm","/vcom.asp","/vcom.htm",
-        "/operation.asp","/operation.htm","/op.asp","/op.htm",
+        # Exact tab name from manual: "Service Mode" / "Port Service Mode"
+        "/Service_Mode.asp","/service_mode.asp","/Service_Mode.htm","/service_mode.htm",
+        "/Port_Service.asp","/port_service.asp","/Port_Service.htm","/port_service.htm",
+        "/service.asp","/service.htm","/mode.asp","/mode.htm",
+        "/vcom.asp","/vcom.htm","/operation.asp","/operation.htm",
         "/tcp_server.asp","/tcp_server.htm","/tcpserver.asp",
-        "/cgi-bin/service.cgi","/cgi-bin/mode.cgi",
+        "/cgi-bin/service.cgi","/cgi-bin/servicemode.cgi","/cgi-bin/mode.cgi",
     ],
     "acl": [
+        # Exact tab name from manual: "Security"
+        "/Security.asp","/security.asp","/Security.htm","/security.htm",
         "/ip_filter.asp","/ip_filter.htm","/acl.asp","/acl.htm",
-        "/access.asp","/access.htm","/security.asp","/security.htm",
-        "/filter.asp","/filter.htm","/firewall.asp","/firewall.htm",
-        "/cgi-bin/acl.cgi","/cgi-bin/filter.cgi",
+        "/access.asp","/access.htm","/filter.asp","/filter.htm",
+        "/firewall.asp","/firewall.htm",
+        "/cgi-bin/security.cgi","/cgi-bin/acl.cgi","/cgi-bin/filter.cgi",
     ],
     "notify": [
-        "/notification.asp","/notification.htm","/notify.asp","/notify.htm",
-        "/event.asp","/event.htm","/alert.asp","/alert.htm",
-        "/snmp.asp","/snmp.htm","/email.asp","/email.htm",
-        "/syslog.asp","/syslog.htm",
-        "/cgi-bin/notify.cgi","/cgi-bin/event.cgi",
+        # Exact tab name from manual: "Notification"
+        "/Notification.asp","/notification.asp","/Notification.htm","/notification.htm",
+        "/notify.asp","/notify.htm","/event.asp","/event.htm",
+        "/alert.asp","/alert.htm","/snmp.asp","/snmp.htm",
+        "/email.asp","/email.htm","/syslog.asp","/syslog.htm",
+        "/Port_Notification.asp","/port_notification.asp",
+        "/cgi-bin/notification.cgi","/cgi-bin/notify.cgi","/cgi-bin/event.cgi",
     ],
     "save": [
-        "/save_restart.asp","/save_restart.htm","/save.asp","/save.htm",
-        "/restart.asp","/restart.htm","/reboot.asp","/reboot.htm",
-        "/factory.asp","/factory.htm","/firmware.asp","/firmware.htm",
+        # Exact label from manual: "Save / Reload" and "Save / Restart"
+        "/Save_Reload.asp","/save_reload.asp","/SaveReload.asp","/savereload.asp",
+        "/Save_Restart.asp","/save_restart.asp","/SaveRestart.asp","/saverestart.asp",
+        "/save.asp","/save.htm","/restart.asp","/restart.htm",
+        "/reboot.asp","/reboot.htm",
+        "/Firmware.asp","/firmware.asp","/Firmware.htm","/firmware.htm",
         "/upgrade.asp","/upgrade.htm","/restore.asp","/restore.htm",
-        "/cgi-bin/save.cgi","/cgi-bin/reboot.cgi",
+        "/factory.asp","/factory.htm",
+        "/cgi-bin/save.cgi","/cgi-bin/savereload.cgi","/cgi-bin/reboot.cgi",
     ],
 }
 
@@ -618,7 +645,19 @@ class ConfigTab(QWidget):
     def _on_loaded(self, res):
         action, visible, hidden = res
         if action is None:
-            self.app.set_status(f"Could not load '{self.section}' — check connection", error=True)
+            self.app.set_status(f"Could not load '{self.section}' page — see Log tab", error=True)
+            QMessageBox.warning(
+                self,
+                "Page Not Found on Device",
+                f"Could not find the <b>{self.section}</b> configuration page on the device.<br><br>"
+                f"All known URL candidates returned 404. The device's actual page paths are unknown.<br><br>"
+                f"<b>To find the real URLs:</b><br>"
+                f"1. Connect to the device (Connect tab)<br>"
+                f"2. Click <b>Probe Device URLs</b> — results appear in the <b>Log</b> tab<br>"
+                f"3. Share the log output so the correct paths can be added<br><br>"
+                f"<b>To change the IP right now:</b> use the <b>SSH Terminal</b> tab — "
+                f"log in as admin and navigate the text menu.",
+            )
             return
         self._action = action; self._visible = visible; self._hidden = hidden
         self.populate(visible)
